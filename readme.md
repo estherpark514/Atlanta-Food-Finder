@@ -16,7 +16,7 @@
 
 ## HTML Pages
 
-Feel free to rename the HTML file as needed. Just let the team know if you make any changes so the backend can be updated accordingly. Also, feel free to delete the comments!
+Feel free to rename the HTML file as needed. Just let the team know if you make any changes so the backend can be updated accordingly. Also, feel free to delete the comments in the file!
 
 ### `register.html`
 - **Purpose:** Signup page for new users.
