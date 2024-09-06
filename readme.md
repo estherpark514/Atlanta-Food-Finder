@@ -2,23 +2,23 @@
 
 ## Folder Structure
 
-### `accounts`
-- **Description:** Contains all the user authentication backend components
-
-### `static`
-- **Description:** Includes static files like stylesheets
+### `Atlanta-Food-Finder`
+- **Description:** The main application of the project. This is where the core functionality of the app is implemented
 
 ### `templates`
 - **Description:** Contains all HTML files used in the project
 
-### `Atlanta-Food-Finder`
-- **Description:** The main application of the project. This is where the core functionality of the app is implemented
+### `static`
+- **Description:** Includes static files like stylesheets
+
+### `accounts`
+- **Description:** Contains all the user authentication backend components
 
 ## HTML Pages
 
 Feel free to rename the HTML file if you need to, and just give the team a heads-up so we can update the backend. You can also delete any comments in the file if that helps.
 
-We might add more HTML pages as we go along. If you add make new files, you can update the README, but if the names are clear enough, you don't have to. The README is here to give the team a quick overview of the project structure before we all dive into coding.
+We might add more HTML pages as we go along. If you make new files, you can update the README, but if the names are clear enough, you don't have to. The README is here to give the team a quick overview of the project structure before we all dive into coding.
 
 ### `register.html`
 - **Purpose:** Signup page for new users.
