@@ -16,7 +16,9 @@
 
 ## HTML Pages
 
-Feel free to rename the HTML file as needed. Just let the team know if you make any changes so the backend can be updated accordingly. Also, feel free to delete the comments in the file!
+Feel free to rename the HTML file if you need to, and just give the team a heads-up so we can update the backend. You can also delete any comments in the file if that helps.
+
+We might add more HTML pages as we go along. If you add make new files, you can update the README, but if the names are clear enough, you don't have to. The README is here to give the team a quick overview of the project structure before we all dive into coding.
 
 ### `register.html`
 - **Purpose:** Signup page for new users.
