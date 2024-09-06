@@ -11,19 +11,19 @@ All HTML pages are located in the `templates` folder.
 ### `register.html`
 - **Purpose:** Signup page for new users.
 - **Required Fields:**
-  - **First Name:** User’s first name.
-  - **Last Name:** User’s last name.
-  - **Username:** Desired username.
-  - **Email:** User’s email address.
-  - **Password:** Chosen password.
+  - **First Name:** 
+  - **Last Name:**
+  - **Username:** 
+  - **Email:** 
+  - **Password:** 
 - **Recommended Link:**
   - **Login:** Direct link to `login.html` for users with an existing account.
 
 ### `login.html`
 - **Purpose:** The login page.
 - **Required Fields:**
-  - **Username:** The user’s username.
-  - **Password:** The user’s password.
+  - **Username:** 
+  - **Password:** 
 - **Included Links:**
   - **Signup:** Direct link to `register.html` for new users.
   - **Forgot Password:** Direct link to `forgot_password.html` for password recovery.
