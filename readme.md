@@ -47,7 +47,7 @@
 ### `password_reset_sent.html`
 - **Purpose:** Appears after the user clicks the "Reset Password" button on `reset_password.html`.
 - **Required Fields:** None.
-- **Required Information:**
+- **Required Information that Needs to be Displayed:**
   - A password reset link has been sent to the user's email.
   - The link will be valid for 24 hours.
 
