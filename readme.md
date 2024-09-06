@@ -1,12 +1,20 @@
 # Atlanta Food Finder
 
-## Overview
+## Folder Structure
 
-This README provides a description of each HTML page and instructions for running the Django project locally.
+### `accounts`
+- **Description:** Contains all the user authentication backend components
+
+### `static`
+- **Description:** Includes static files like stylesheets
+
+### `templates`
+- **Description:** Contains all HTML files used in the project
+
+### `Atlanta-Food-Finder`
+- **Description:** The main application of the project. This is where the core functionality of the app is implemented
 
 ## HTML Pages
-
-All HTML pages are located in the `templates` folder.
 
 ### `register.html`
 - **Purpose:** Signup page for new users.
