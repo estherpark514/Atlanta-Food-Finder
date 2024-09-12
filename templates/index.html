@@ -54,33 +54,104 @@
         </div>
     </section>
 
-<!--   
-function handleTabs(target) {
-    const tabs = (target.querySelectorAll('[roll = "tab"]'));
-    const tabPanels = (target.querySelectorAll(' [role=" tabpanel"] ')) ;
-    const activeClassList = ["active"] ;
-    
-    function changeTab(target) {
-        target.focus();
-        const controls = (target.getAttribute ("aria-controls"));
-    
-        for (const tab of tabs) {
-            const isActiveTab = tab.id === target.id;
-            const tabIndex = isActiveTab ? "O" : "-1" ;
-            const ariaSelected = isActiveTab ? "true" : "false";
+    <section class="Recommended" id="Recommended">
+        <div class="menu-section _content">
+            <div id="tabpanel01" role="tabpanel" aria-labelledby="tab01" class="tab-content-column tabcontent">
+                <div class="menu grid">
 
-            tab.setAttribute("tabindex", tabIndex);
-            tab.setAttribute("area-selected", areaSelected);
-            isActiveTab ? tab.classList.add(...activeClassList) : tab.classList.remove(...activeClassList)
-        }
+                    <!-- User Profile 1 -->
+                    <div class="user-profile">
+                        <img src="1.png" alt="Product Image" class="user-profile_image">
+                        <div class="columnrating">
+                            <div class="user-profile_description">
+                                <h3 class="ui heading size-headingxl">Atlanta Breakfast Club</h3>
+                                <p class="user-profile_text ui text size-texts">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
+                                </p>
+                            </div>
+                            <div class="user-profile_rating ui ratingbar">
+                                <input type="radio" id="RatingBar201" name="RatingBar20" value="1" />
+                                <label for="RatingBar201" title="1 star"></label>
+                                <input type="radio" id="RatingBar202" name="RatingBar20" value="2" />
+                                <label for="RatingBar202" title="2 stars"></label>
+                                <input type="radio" id="RatingBar203" name="RatingBar20" value="3" />
+                                <label for="RatingBar203" title="3 stars"></label>
+                                <input type="radio" id="RatingBar204" name="RatingBar20" value="4" />
+                                <label for="RatingBar204" title="4 stars"></label>
+                                <input type="radio" id="RatingBar205" name="RatingBar20" value="5" />
+                                <label for="RatingBar205" title="5 stars"></label>
+                            </div>
+                            <div class="user-profile_pricing">
+                                <h4 class="ui heading size-headinglg">$12.05</h4>
+                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
+                            </div>
+                        </div>
+                    </div>
 
-        for (const panel if tabPanels) {
-            const shouldHidePanel = panel.id !== controls;
-            panel.hidden = shouldHidePanel;
-            panel.style.display = shouldHidePanel ? "none" : "";
-        }
-    }
-    function handleClickEvent(event) {
-        changeTab(event.target);
-    }
-} -->
+                    <!-- User Profile 2 -->
+                    <div class="user-profile">
+                        <img src="2.png" alt="Product Image" class="user-profile_image">
+                        <div class="columnrating">
+                            <div class="user-profile_description">
+                                <h3 class="ui heading size-headingxl">Cafe Midtwon</h3>
+                                <p class="user-profile_text ui text size-texts">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
+                                </p>
+                            </div>
+                            <div class="user-profile_rating ui ratingbar">
+                                <input type="radio" id="RatingBar206" name="RatingBar21" value="1" />
+                                <label for="RatingBar206" title="1 star"></label>
+                                <input type="radio" id="RatingBar207" name="RatingBar21" value="2" />
+                                <label for="RatingBar207" title="2 stars"></label>
+                                <input type="radio" id="RatingBar208" name="RatingBar21" value="3" />
+                                <label for="RatingBar208" title="3 stars"></label>
+                                <input type="radio" id="RatingBar209" name="RatingBar21" value="4" />
+                                <label for="RatingBar209" title="4 stars"></label>
+                                <input type="radio" id="RatingBar210" name="RatingBar21" value="5" />
+                                <label for="RatingBar210" title="5 stars"></label>
+                            </div>
+                            <div class="user-profile_pricing">
+                                <h4 class="ui heading size-headinglg">$15.00</h4>
+                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Profile 3 -->
+                    <div class="user-profile">
+                        <img src="3.png" alt="Product Image" class="user-profile_image">
+                        <div class="columnrating">
+                            <div class="user-profile_description">
+                                <h3 class="ui heading size-headingxl">New Spot</h3>
+                                <p class="user-profile_text ui text size-texts">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
+                                </p>
+                            </div>
+                            <div class="user-profile_rating ui ratingbar">
+                                <input type="radio" id="RatingBar211" name="RatingBar22" value="1" />
+                                <label for="RatingBar211" title="1 star"></label>
+                                <input type="radio" id="RatingBar212" name="RatingBar22" value="2" />
+                                <label for="RatingBar212" title="2 stars"></label>
+                                <input type="radio" id="RatingBar213" name="RatingBar22" value="3" />
+                                <label for="RatingBar213" title="3 stars"></label>
+                                <input type="radio" id="RatingBar214" name="RatingBar22" value="4" />
+                                <label for="RatingBar214" title="4 stars"></label>
+                                <input type="radio" id="RatingBar215" name="RatingBar22" value="5" />
+                                <label for="RatingBar215" title="5 stars"></label>
+                            </div>
+                            <div class="user-profile_pricing">
+                                <h4 class="ui heading size-headinglg">$10.00</h4>
+                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of your page content -->
+
+</body>
+</html>

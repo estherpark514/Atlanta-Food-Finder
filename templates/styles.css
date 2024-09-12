@@ -56,9 +56,113 @@ body{
     border-bottom: 3px solid transparent;
 
 }
-.navbar a:hover,
+.navbar a:hover{
+    color: var(--main-color);
+}
 
 .navbar a.active{
-    color: var(--main-color);
+    color: black;
     border-bottom: 3px solid var(--main-color);
+}
+.Recommended {
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+.menu-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
+}
+
+.user-profile {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.user-profile:hover {
+    transform: translateY(-10px);
+}
+
+.user-profile_image {
+    width: 100%;
+    height: auto;
+}
+
+.columnrating {
+    padding: 20px;
+}
+
+.user-profile_description {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.user-profile_description h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #333;
+}
+
+
+.user-profile_text {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Rating Section */
+.user-profile_rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.user-profile_rating input[type="radio"] {
+    display: none;
+}
+
+.user-profile_rating label {
+    font-size: 24px;
+    color: #ccc;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.user-profile_rating input[type="radio"]:checked ~ label {
+    color: #f39c12;
+}
+
+/* Pricing Section */
+.user-profile_pricing {
+    text-align: center;
+}
+
+.user-profile_pricing h4 {
+    font-size: 1.25em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.user-profile_button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.user-profile_button:hover {
+    background-color: #c0392b;
 }
