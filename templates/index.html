@@ -8,10 +8,78 @@
     content="width=device-width, initial-scale=1.0">
     <title>Atlanta Food Finder</title>
     <link rel="stylesheet" href="style.css">
-</head>
-  
-.h{
     
-}
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Atlanta
+            var atlanta = {lat: 33.7490, lng: -84.3880};
+            // The map, centered at Atlanta
+            var map = new google.maps.Map(
+                document.getElementById('map'), {
+                    zoom: 12,
+                    center: atlanta
+                });
+            // The marker, positioned at Atlanta
+            var marker = new google.maps.Marker({
+                position: atlanta,
+                map: map
+            });
+        }
+    </script>
+</head>
 
 
+
+<body>
+
+    <header class="header">
+        <a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>
+
+        
+        <nav class= "navbar">
+            <a href="#Home">Home</a>
+            <a href="#Menu">Menu</a>
+            <a href="#Order">Order</a>
+        </nav>
+    </header>
+
+    <section class="Home" id="Home">
+        <div class="home-content">
+        <h1>Find the Perfect Spot in Atlanta</h1>
+        
+        <div id="map" style="height: 500px; width: 100%;"></div>
+        </div>
+    </section>
+
+<!--   
+function handleTabs(target) {
+    const tabs = (target.querySelectorAll('[roll = "tab"]'));
+    const tabPanels = (target.querySelectorAll(' [role=" tabpanel"] ')) ;
+    const activeClassList = ["active"] ;
+    
+    function changeTab(target) {
+        target.focus();
+        const controls = (target.getAttribute ("aria-controls"));
+    
+        for (const tab of tabs) {
+            const isActiveTab = tab.id === target.id;
+            const tabIndex = isActiveTab ? "O" : "-1" ;
+            const ariaSelected = isActiveTab ? "true" : "false";
+
+            tab.setAttribute("tabindex", tabIndex);
+            tab.setAttribute("area-selected", areaSelected);
+            isActiveTab ? tab.classList.add(...activeClassList) : tab.classList.remove(...activeClassList)
+        }
+
+        for (const panel if tabPanels) {
+            const shouldHidePanel = panel.id !== controls;
+            panel.hidden = shouldHidePanel;
+            panel.style.display = shouldHidePanel ? "none" : "";
+        }
+    }
+    function handleClickEvent(event) {
+        changeTab(event.target);
+    }
+} -->
