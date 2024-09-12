@@ -12,20 +12,21 @@
 :root {
     --bg-color:#FFF7EE;
     --second-bg-color:#2222228d;
-    --text-color: black;
-    --main-color: #68cef3;
+    --text-color: rgb(0, 0, 0);
+    --main-color: #c3ecb2;
 }
 body{
     background: var(--bg-color);
     color: var(--text-color);
+    padding-top: 150px;
 }
 .header{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 4rem 12% 4rem;
-    background: rgba(0, 0, 0, 0.699);
+    padding: 2rem 5% 2rem;
+    background: #c3ecb2;
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
@@ -33,9 +34,9 @@ body{
     z-index: 5;
 }
 .logo{
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--text-color);
-    font-weight: 800;
+    font-weight: 400;
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -47,7 +48,7 @@ body{
 }
 
 .navbar a{
-    font-size: 1.8rem;
+    font-size: 1rem;
     color: var(--text-color);
     margin-left: 4rem;
     font-weight: 500;
@@ -56,6 +57,7 @@ body{
 
 }
 .navbar a:hover,
+
 .navbar a.active{
     color: var(--main-color);
     border-bottom: 3px solid var(--main-color);
