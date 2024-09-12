@@ -81,7 +81,7 @@ body{
 }
 
 .user-profile {
-    background-color: #fff;
+    background-color: rgba(196, 244, 196, 0.608);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     overflow: hidden;
@@ -148,12 +148,12 @@ body{
 
 .user-profile_pricing h4 {
     font-size: 1.25em;
-    color: #333;
+    color: #0a311e;
     margin: 10px 0;
 }
 
 .user-profile_button {
-    background-color: #e74c3c;
+    background-color: green;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -164,5 +164,5 @@ body{
 }
 
 .user-profile_button:hover {
-    background-color: #c0392b;
+    background-color: #07471f;
 }
