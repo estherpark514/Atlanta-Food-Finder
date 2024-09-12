@@ -1,3 +1,25 @@
 <!--login page-->
 <!--required fields: username, password-->
 <!--include a direct link to register.html (signup) and a direct link to forgot_password.html (reset your password) -->
+<!Doctype html> 
+    <html>
+        <head>
+            <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="/static/styles.css"> 
+            <title> Login Form </title> 
+        </head>
+
+        <body>
+            <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required> 
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required> 
+            <br>
+            <input type="submit" value="Login">
+            <a href="register.html"> Register</a>
+            <a href="forgot_password.html"> Forgot Password</a>
+            </form>
+        </body>
+    </html>
