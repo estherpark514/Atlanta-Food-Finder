@@ -73,23 +73,13 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
                                 </p>
                             </div>
-                            <div class="star-rating">
+                            <div class="star-rating" data-rating="4.2">
                                 <div class="stars-outer">
                                     <div class="stars-inner">
                                     </div>
                                     <span class="rating-value">4.2</span>
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded", function() {
-                                          const rating = 4.2; // This is the average rating
-                                          const starTotal = 5; // Total stars
-                                          
-                                          const starPercentage = (rating / starTotal) * 100;
-                                          const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`; // Rounding to nearest 10%
-                                      
-                                          document.querySelector(".stars-inner").style.width = starPercentageRounded;
-                                        });
-                                      </script>
-                                </div>
+                                    <script src="script.js"></script>
+                                </div>  
                             </div>
                             
                               
@@ -110,7 +100,6 @@
                                 <h4 class="ui heading size-headinglg">$12.05</h4>
                                 <button class="user-profile_button ui button red size-xl fill">Order now</button>
                             </div> 
-                            
                         </div>
                     </div>
 
@@ -124,7 +113,15 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
                                 </p>
                             </div>
-                            <div class="user-profile_rating ui ratingbar">
+                            <div class="star-rating" data-rating="4.5">
+                                <div class="stars-outer">
+                                    <div class="stars-inner">
+                                    </div>
+                                    <span class="rating-value">4.5</span>
+                                    <script src="script.js"></script>
+                                </div>
+                            </div>
+                            <!-- <div class="user-profile_rating ui ratingbar">
                                 <input type="radio" id="RatingBar206" name="RatingBar21" value="1" />
                                 <label for="RatingBar206" title="1 star"></label>
                                 <input type="radio" id="RatingBar207" name="RatingBar21" value="2" />
@@ -135,7 +132,8 @@
                                 <label for="RatingBar209" title="4 stars"></label>
                                 <input type="radio" id="RatingBar210" name="RatingBar21" value="5" />
                                 <label for="RatingBar210" title="5 stars"></label>
-                            </div>
+                            </div> -->
+
                             <div class="user-profile_pricing">
                                 <h4 class="ui heading size-headinglg">$15.00</h4>
                                 <button class="user-profile_button ui button red size-xl fill">Order now</button>
@@ -153,7 +151,15 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
                                 </p>
                             </div>
-                            <div class="user-profile_rating ui ratingbar">
+                            <div class="star-rating" data-rating="4.8">
+                                <div class="stars-outer">
+                                    <div class="stars-inner">
+                                    </div>
+                                    <span class="rating-value">4.8</span>
+                                    <script src="script.js"></script>
+                                </div>
+                            </div>
+                            <!-- <div class="user-profile_rating ui ratingbar">
                                 <input type="radio" id="RatingBar211" name="RatingBar22" value="1" />
                                 <label for="RatingBar211" title="1 star"></label>
                                 <input type="radio" id="RatingBar212" name="RatingBar22" value="2" />
@@ -164,7 +170,8 @@
                                 <label for="RatingBar214" title="4 stars"></label>
                                 <input type="radio" id="RatingBar215" name="RatingBar22" value="5" />
                                 <label for="RatingBar215" title="5 stars"></label>
-                            </div>
+                            </div> -->
+                            
                             <div class="user-profile_pricing">
                                 <h4 class="ui heading size-headinglg">$10.00</h4>
                                 <button class="user-profile_button ui button red size-xl fill">Order now</button>
@@ -178,6 +185,24 @@
     </section>
 
     <!-- Rest of your page content -->
+     <!-- Script for Average Star Ratings-->
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const starRatings = document.querySelectorAll('.star-rating'); // Select all star-rating elements
+      
+          starRatings.forEach(starRating => {
+            const rating = parseFloat(starRating.getAttribute('data-rating')); // Get the rating from the data attribute
+            const starTotal = 5;
+      
+            const starPercentage = (rating / starTotal) * 100;
+            const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+      
+            starRating.querySelector('.stars-inner').style.width = starPercentageRounded;
+            starRating.querySelector('.rating-value').textContent = rating;
+          });
+        });
+      </script>
+      
 
 </body>
 </html>
