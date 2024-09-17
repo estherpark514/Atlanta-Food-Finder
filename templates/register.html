@@ -1,3 +1,80 @@
 <!--signup page-->
 <!--required fields: first name, last name, username, email, password-->
 <!--recommended: include a direct link to login.html (login) for if the user already has an account -->
+<!Doctype html> 
+    <html>
+        <head>
+            <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="styles.css"> 
+            <title> Registration Form </title> 
+            <style> 
+                 h1{
+                    color:#4C8160;
+                    text-align:center;
+                }
+                
+                div {
+                    text-align: center;
+                    position: relative;
+                    }
+
+                form{
+                    margin:auto;
+                    color:#4C8160;
+                }
+
+                input[type=text], input[type=password], input[type=email] {
+                    width: 50%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid;
+                    box-sizing: border-box;
+                    text-align: center;
+                }
+
+                button{
+                    width: 50%;
+                    background-color: #04AA6D;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    border: none;
+                    cursor: pointer;
+                    
+                }
+                button:hover{
+                    opacity: 0.8;
+                }
+
+                form{
+                    font-size: 15px;
+                }
+
+            </style>
+        </head>
+
+        <body>
+            <form>
+                <div>
+                    <img src="profil pic icon.png" alt="test" width="150" height="150">
+                </div>
+                <h1>Register</h1>
+                <br>
+            <div>
+                <input type="text" id="fname" name="fname" placeholder="First" required> 
+            <br>
+            <input type="text" id="lname" name="lname" placeholder="Last"required> 
+            <input type="email" id="email" name="email" placeholder="Email"required> 
+            <input type="text" id="username" name="username" placeholder="Username"required> 
+            <input type="password" id="password" name="password" placeholder="Password" required> 
+            <button type="submit">Register</button>
+            <br>
+            <a href="login.html"> Already have an account? </a>
+            
+            </div>
+            
+            </form>
+            
+        </body>
+    </html>
