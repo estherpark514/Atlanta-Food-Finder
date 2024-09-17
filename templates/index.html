@@ -9,25 +9,7 @@
     <title>Atlanta Food Finder</title>
     <link rel="stylesheet" href="styles.css">
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKq25ooRZTBr-7RsbX60Mzl1OFZgqePuE&callback=initMap" async defer></script>
-    <script>
-        // Initialize and add the map
-        function initMap() {
-            // The location of Atlanta
-            var atlanta = {lat: 33.7490, lng: -84.3880};
-            // The map, centered at Atlanta
-            var map = new google.maps.Map(
-                document.getElementById('map'), {
-                    zoom: 12,
-                    center: atlanta
-                });
-            // The marker, positioned at Atlanta
-            var marker = new google.maps.Marker({
-                position: atlanta,
-                map: map
-            });
-        }
-    </script>
+    <iframe src="restaurant_map.html" width="100%" height="600px"></iframe>
 </head>
 
 
