@@ -178,10 +178,10 @@ body{
 }
 
 .stars-outer {
-    display: in-line block;
-    position: relative
+    display: in-line-block;
+    position: relative;
     font-family: FontAwesome;
-    color: rgb(225, 214, 116);
+    color: lightgray;
 }
 
 .stars-inner {
@@ -195,14 +195,16 @@ body{
 }
 
 .stars-outer::before {
-    content: "\2605 \2605 \2605 \2605";
+    content: "\2605 \2605 \2605 \2605 \2605";
 }
 
 .stars-inner::before {
-    content: "\2605 \2605 \2605 \2605";
+    content: "\2605 \2605 \2605 \2605 \2605";
 }
 
 .rating-value {
     font-size: 0.8em;
     margin-left: 10px;
+    display: inline-block;
+    vertical-align:middle;
 }
