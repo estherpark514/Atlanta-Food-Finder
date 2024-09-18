@@ -168,3 +168,43 @@ body{
 .user-profile_button:hover {
     background-color: #07471f;
 }
+
+.star-rating {
+    font-size: 2em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stars-outer {
+    display: in-line-block;
+    position: relative;
+    font-family: FontAwesome;
+    color: lightgray;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    color: gold;
+}
+
+.stars-outer::before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+}
+
+.stars-inner::before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+}
+
+.rating-value {
+    font-size: 0.8em;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align:middle;
+}
