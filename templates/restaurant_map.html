@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLBtkghppVDE_9Sh29rCdHFIJOkq9F8V0&libraries=places"></script>
+    <script>
+      let map;
+
+      function initMap() {
+        // Initialize the map, centered on Atlanta
+        const atlanta = { lat: 33.7490, lng: -84.3880 };
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: atlanta,
+          zoom: 12,
+        });
+
+        // Use Google Places API to fetch restaurants around Atlanta
+        const service = new google.maps.places.PlacesService(map);
+        const request = {
+          location: atlanta,
+          radius: '5000', // Adjust the radius as needed
+          type: ['restaurant'],
+        };
+
+        // Search for restaurants and add markers
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+          }
+        });
+      }
+
+      // Create a marker for each restaurant
+      function createMarker(place) {
+        const marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          title: place.name,
+        });
+
+        // Create an info window
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<h3>${place.name}</h3><p>${place.vicinity}</p>`,
+        });
+
+        // Add click event to show the info window
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      }
+    </script>
+    <style>
+      #map {
+        height: 100vh;
+        width: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // Initialize the map when the page loads
+      initMap();
+    </script>
+  </body>
+</html>

@@ -1,34 +1,124 @@
-<!--signup page-->
-<!--required fields: first name, last name, username, email, password-->
-<!--recommended: include a direct link to login.html (login) for if the user already has an account -->
-<!Doctype html> 
-    <html>
-        <head>
-            <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="/static/styles.css"> 
-            <title> Registration Form </title> 
-        </head>
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <title>Registration Form</title>
+    <style>
+      h1 {
+        color: #4c8160;
+        text-align: center;
+      }
 
-        <body>
-            <form>
-            <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="fname" required> 
-            <br>
-            <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname" required> 
-            <br>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required> 
-            <br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required> 
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required> 
-            <br>
-            <input type="submit" value="Register">
-            <a href="login.html"> Login </a>
-            </form>
-            
-        </body>
-    </html>
+      div {
+        text-align: center;
+        position: relative;
+      }
+
+      form {
+        margin: auto;
+        color: #4c8160;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      button {
+        width: 50%;
+        background-color: #04aa6d;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+
+      form {
+        font-size: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% if messages %}
+          {% for message in messages %}
+              {% if message.tags == 'error' %}
+                  <center><h4 style="color: firebrick;">{{message}}</h4></center>
+              {% else %}
+                  <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <div>
+        <img
+          src="{% static 'profil pic icon.png' %}"
+          width="150"
+          height="150"
+        />
+      </div>
+      <h1>Register</h1>
+
+      <br />
+      <div>
+        <input
+          type="text"
+          id="fname"
+          name="first_name"
+          placeholder="First Name"
+          required
+        />
+        <br />
+        <input
+          type="text"
+          id="lname"
+          name="last_name"
+          placeholder="Last Name"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email Address"
+          required
+        />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Register</button>
+        <br />
+        <a href="{% url 'login' %}"> Already have an account? </a>
+      </div>
+    </form>
+  </body>
+</html>
