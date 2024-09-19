@@ -1,76 +1,95 @@
 <!--main page after the successful login-->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Atlanta Food Finder</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKq25ooRZTBr-7RsbX60Mzl1OFZgqePuE&callback=initMap" async defer></script>
-    <script>
-        // Initialize and add the map
-        function initMap() {
-            // The location of Atlanta
-            var atlanta = {lat: 33.7490, lng: -84.3880};
-            // The map, centered at Atlanta
-            var map = new google.maps.Map(
-                document.getElementById('map'), {
-                    zoom: 12,
-                    center: atlanta
-                });
-            // The marker, positioned at Atlanta
-            var marker = new google.maps.Marker({
-                position: atlanta,
-                map: map
-            });
-        }
-    </script>
-</head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <script src="{% static 'script.js' %}" defer></script>
+  </head>
 
-
-
-<body>
-
+  <body>
     <header class="header">
-        <a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>
+      <img
+        src="{% static 'Logo.png' %}"
+        width="70"
+        height="70"
+        style="margin-right: 0px; margin-top: -14px"
+      />
+      <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
 
-        
-        <nav class= "navbar">
-            <a href="#Home">Home</a>
-            <a href="#Recommended">Recommended</a>
-            <img src="profil pic icon.png" width = 40 height = 40 style="float: right; margin-left: 5px; margin-top: -14px;">
-            <a href="#profile">Profile</a>
-        </nav>
+      <a href="#Home" class="logo" style="margin-left: -200px">
+        <span> Atlanta Food Finder </span></a
+      >
+
+      <tag class="navbar"></tag>
+      <nav class="navbar">
+        <a href="#Home">Home</a>
+        <a href="#Recommended">Recommended</a>
+        <img
+          src="{% static 'profil pic icon.png' %}"
+          width="40"
+          height="40"
+          style="float: right; margin-left: 10px; margin-top: -14px"
+        />
+        <a href="#profile">Profile</a>
+      </nav>
     </header>
 
     <section class="Home" id="Home">
-        <div class="home-content">
+      <div class="home-content">
         <h1>Find the Perfect Spot in Atlanta</h1>
-        <style>h1{text-align: center; padding: 0px 0px 10px;}</style>
-        
-        <div id="map" style="height: 500px; width: 100%;"></div>
-        </div>
+        <style>
+          h1 {
+            text-align: center;
+            padding: 0px 0px 10px;
+          }
+        </style>
+
+        <div id="map" style="height: 500px; width: 100%"></div>
+      </div>
     </section>
 
     <section class="Recommended" id="Recommended">
-        <div class="menu-section _content">
-            <div id="tabpanel01" role="tabpanel" aria-labelledby="tab01" class="tab-content-column tabcontent">
-                <div class="menu grid">
+      <div class="menu-section _content">
+        <div
+          id="tabpanel01"
+          role="tabpanel"
+          aria-labelledby="tab01"
+          class="tab-content-column tabcontent"
+        >
+          <div class="menu grid">
+            <!-- User Profile 1 -->
+            <div class="user-profile">
+              <img
+                src="{% static '3.png' %}"
+                alt="Product Image"
+                class="user-profile_image"
+              />
+              <div class="columnrating">
+                <div class="user-profile_description">
+                  <h3 class="ui heading size-headingxl">
+                    Atlanta Breakfast Club
+                  </h3>
+                  <p class="user-profile_text ui text size-texts">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Egestas consequat mi eget auctor aliquam.
+                  </p>
+                </div>
+                <div class="rating-container">
+                  <div class="star-rating" data-rating="4.3"><!--4.3-->
+                    <div class="star" data-value="1"></div>
+                    <div class="star" data-value="2"></div>
+                    <div class="star" data-value="3"></div>
+                    <div class="star" data-value="4"></div>
+                    <div class="star" data-value="5"></div>
+                    <span class="rating-value">4.3</span>
+                  </div>
+                </div>
 
-                    <!-- User Profile 1 -->
-                    <div class="user-profile">
-                        <img src="3.png" alt="Product Image" class="user-profile_image">
-                        <div class="columnrating">
-                            <div class="user-profile_description">
-                                <h3 class="ui heading size-headingxl">Atlanta Breakfast Club</h3>
-                                <p class="user-profile_text ui text size-texts">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
-                                </p>
-                            </div>
-                            <div class="user-profile_rating ui ratingbar">
+                <!-- <div class="user-profile_rating ui ratingbar">
                                 <input type="radio" id="RatingBar201" name="RatingBar20" value="1" />
                                 <label for="RatingBar201" title="1 star"></label>
                                 <input type="radio" id="RatingBar202" name="RatingBar20" value="2" />
@@ -82,24 +101,44 @@
                                 <input type="radio" id="RatingBar205" name="RatingBar20" value="5" />
                                 <label for="RatingBar205" title="5 stars"></label>
                             </div>
-                            <div class="user-profile_pricing">
-                                <h4 class="ui heading size-headinglg">$12.05</h4>
-                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
-                            </div>
-                        </div>
-                    </div>
+                        -->
+                <div class="user-profile_pricing">
+                  <h4 class="ui heading size-headinglg">$12.05</h4>
+                  <button
+                    class="user-profile_button ui button red size-xl fill"
+                  >
+                    Order now
+                  </button>
+                </div>
+              </div>
+            </div>
 
-                    <!-- User Profile 2 -->
-                    <div class="user-profile">
-                        <img src="2.png" alt="Product Image" class="user-profile_image">
-                        <div class="columnrating">
-                            <div class="user-profile_description">
-                                <h3 class="ui heading size-headingxl">The Optimist </h3>
-                                <p class="user-profile_text ui text size-texts">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
-                                </p>
-                            </div>
-                            <div class="user-profile_rating ui ratingbar">
+            <!-- User Profile 2 -->
+            <div class="user-profile">
+              <img
+                src="{% static '2.png' %}"
+                alt="Product Image"
+                class="user-profile_image"
+              />
+              <div class="columnrating">
+                <div class="user-profile_description">
+                  <h3 class="ui heading size-headingxl">The Optimist</h3>
+                  <p class="user-profile_text ui text size-texts">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Egestas consequat mi eget auctor aliquam.
+                  </p>
+                </div>
+                <div class="rating-container">
+                  <div class="star-rating" data-rating="3.5"><!--4.5-->
+                    <div class="star" data-value="1"></div>
+                    <div class="star" data-value="2"></div>
+                    <div class="star" data-value="3"></div>
+                    <div class="star" data-value="4"></div>
+                    <div class="star" data-value="5"></div>
+                    <span class="rating-value">3.5</span>
+                  </div>
+                </div>
+                <!-- <div class="user-profile_rating ui ratingbar">
                                 <input type="radio" id="RatingBar206" name="RatingBar21" value="1" />
                                 <label for="RatingBar206" title="1 star"></label>
                                 <input type="radio" id="RatingBar207" name="RatingBar21" value="2" />
@@ -110,25 +149,46 @@
                                 <label for="RatingBar209" title="4 stars"></label>
                                 <input type="radio" id="RatingBar210" name="RatingBar21" value="5" />
                                 <label for="RatingBar210" title="5 stars"></label>
-                            </div>
-                            <div class="user-profile_pricing">
-                                <h4 class="ui heading size-headinglg">$15.00</h4>
-                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
-                            </div>
-                        </div>
-                    </div>
+                            </div> -->
 
-                    <!-- User Profile 3 -->
-                    <div class="user-profile">
-                        <img src="1.png" alt="Product Image" class="user-profile_image">
-                        <div class="columnrating">
-                            <div class="user-profile_description">
-                                <h3 class="ui heading size-headingxl">Ecco Midtown</h3>
-                                <p class="user-profile_text ui text size-texts">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas consequat mi eget auctor aliquam.
-                                </p>
-                            </div>
-                            <div class="user-profile_rating ui ratingbar">
+                <div class="user-profile_pricing">
+                  <h4 class="ui heading size-headinglg">$15.00</h4>
+                  <button
+                    class="user-profile_button ui button red size-xl fill"
+                  >
+                    Order now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- User Profile 3 -->
+            <div class="user-profile">
+              <img
+                src="{% static '1.png' %}"
+                alt="Product Image"
+                class="user-profile_image"
+              />
+              <div class="columnrating">
+                <div class="user-profile_description">
+                  <h3 class="ui heading size-headingxl">Ecco Midtown</h3>
+                  <p class="user-profile_text ui text size-texts">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Egestas consequat mi eget auctor aliquam.
+                  </p>
+                </div>
+                <div class="rating-container">
+                  <div class="star-rating" data-rating="4.6"><!--4.8-->
+                    <div class="star" data-value="1"></div>
+                    <div class="star" data-value="2"></div>
+                    <div class="star" data-value="3"></div>
+                    <div class="star" data-value="4"></div>
+                    <div class="star" data-value="5"></div>
+                    <span class="rating-value">4.6</span>
+                  </div>
+                </div>
+
+                <!-- <div class="user-profile_rating ui ratingbar">
                                 <input type="radio" id="RatingBar211" name="RatingBar22" value="1" />
                                 <label for="RatingBar211" title="1 star"></label>
                                 <input type="radio" id="RatingBar212" name="RatingBar22" value="2" />
@@ -139,20 +199,21 @@
                                 <label for="RatingBar214" title="4 stars"></label>
                                 <input type="radio" id="RatingBar215" name="RatingBar22" value="5" />
                                 <label for="RatingBar215" title="5 stars"></label>
-                            </div>
-                            <div class="user-profile_pricing">
-                                <h4 class="ui heading size-headinglg">$10.00</h4>
-                                <button class="user-profile_button ui button red size-xl fill">Order now</button>
-                            </div>
-                        </div>
-                    </div>
+                            </div> -->
 
+                <div class="user-profile_pricing">
+                  <h4 class="ui heading size-headinglg">$10.00</h4>
+                  <button
+                    class="user-profile_button ui button red size-xl fill"
+                  >
+                    Order now
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
-
-    <!-- Rest of your page content -->
-
-</body>
+  </body>
 </html>

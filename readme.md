@@ -76,13 +76,9 @@ git clone https://github.com/estherpark514/Atlanta-Food-Finder.git
 cd atlanta-food-finder
 ```
 
-### 2. Apply Migrations
-
-Create and apply database migrations:
-
+### 2. Install dependencies
 ```bash
-python manage.py makemigrations
-python manage.py migrate
+pip install -r requirements.txt
 ```
 
 ### 3. Run the Development Server
