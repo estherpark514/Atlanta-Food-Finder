@@ -144,14 +144,29 @@ body{
 }
 
 /* Pricing Section */
+
+.heart-icon {
+    font-size: 0.3em; 
+    color: rgb(255, 21, 21);
+    display: inline-block;
+    margin: 5px 5px 5px 5px; /* Add some spacing around the heart */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.heart-icon:hover {
+    transform: scale(1.2);
+    color: #f33404; 
+}
+
 .user-profile_pricing {
     text-align: center;
 }
 
 .user-profile_pricing h4 {
-    font-size: 1.25em;
-    color: #0a311e;
-    margin: 10px 0;
+    font-size: 3em;
+    color: #8e1f00;
+    margin: 10px;
 }
 
 .user-profile_button {
@@ -187,7 +202,7 @@ body{
     font-family: FontAwesome; 
     color: lightgray; 
     width: 1em;
-    height: 1em;
+    height: 2em;
     overflow: hidden;
 }
 
@@ -230,4 +245,69 @@ body{
     margin-left: 10px;
     display: inline-block;
     vertical-align: middle;
+}
+
+
+
+
+/* Profile Page Styling */
+.profile-content {
+    display: flex;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+}
+
+.review-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review-list li {
+    margin-bottom: 15px;
+}
+
+.profile-main {
+    width: 75%;
+    padding: 20px;
+}
+
+.favorite-restaurants {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.restaurant-item {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.restaurant-item:hover {
+    transform: scale(1.05);
+}
+
+.restaurant-item img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
