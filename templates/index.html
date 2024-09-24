@@ -21,13 +21,13 @@
       />
       <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
 
-      <a href="#Home" class="logo" style="margin-left: -200px">
+      <a href="{% url 'home' %}" class="logo" style="margin-left: -200px">
         <span> Atlanta Food Finder </span></a
       >
 
       <tag class="navbar"></tag>
       <nav class="navbar">
-        <a href="#Home">Home</a>
+        <a href="{% url 'home' %}">Home</a>
         <a href="#Recommended">Recommended</a>
         <img
           src="{% static 'profil pic icon.png' %}"
@@ -35,7 +35,7 @@
           height="40"
           style="float: right; margin-left: 10px; margin-top: -14px"
         />
-        <a href="#profile">Profile</a>
+        <a href="{% url 'profile' %}">Profile</a>
       </nav>
     </header>
 

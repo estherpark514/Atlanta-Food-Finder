@@ -166,3 +166,6 @@ def ResetPassword(request, reset_id):
         return redirect('forgot-password')
 
     return render(request, 'reset_password.html')
+
+def Profile(request):
+    return render(request, 'profile.html')
