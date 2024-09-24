@@ -57,7 +57,8 @@ body{
 
 }
 .navbar a:hover{
-    color: var(--main-color);
+    color: black;
+    text-shadow: #07471f;
 }
 
 .navbar a.active{
