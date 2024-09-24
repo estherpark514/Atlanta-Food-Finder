@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Profile - Atlanta Food Finder</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="{% static 'script.js' %}" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <img
+        src="{% static 'Logo.png' %}"
+        width="70"
+        height="70"
+        style="margin-right: 0px; margin-top: -14px"
+      />
+
+      <a href="{% url 'index' %}" class="logo" style="margin-left: -200px">
+        <span> Atlanta Food Finder </span></a
+      >
+
+      <nav class="navbar">
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'recommended' %}">Recommended</a>
+        <img
+          src="{% static 'profil pic icon.png' %}"
+          width="40"
+          height="40"
+          style="float: right; margin-left: 10px; margin-top: -14px"
+        />
+        <a href="#profile">Profile</a>
+      </nav>
+    </header>
+
+    <section class="profile" id="profile">
+      <div class="sidebar">
+        <h2>Your Reviews</h2>
+        <ul class="review-list">
+          <!-- Dynamically load user reviews here -->
+          <li><strong>Review 1:</strong> "Loved the food at XYZ!"</li>
+          <li><strong>Review 2:</strong> "Great atmosphere at ABC."</li>
+          <!-- Add more reviews -->
+        </ul>
+      </div>
+      </section>
+
+      <section class="profile" id="profile">
+        <h1>Welcome, [Username]</h1>
+        <h2>Your Favorite Restaurants</h2>
+        <div class="favorite-restaurants">
+          <!-- List favorite restaurants with heart icons -->
+          <div class="restaurant-item">
+            <img src="{% static '1.png' %}" alt="Restaurant 1" width="150" height="150" />
+            <h3>Restaurant 1</h3>
+            <p>Atlanta Breakfast Club</p>
+          </div>
+          <div class="restaurant-item">
+            <img src="{% static '2.png' %}" alt="Restaurant 2" width="150" height="150" />
+            <h3>Restaurant 2</h3>
+            <p>The Optimist</p>
+          </div>
+          <!-- More restaurants can be added dynamically -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 Atlanta Food Finder. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
