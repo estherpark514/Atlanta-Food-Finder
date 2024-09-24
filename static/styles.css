@@ -156,7 +156,7 @@ body{
 
 .heart-icon:hover {
     transform: scale(1.2);
-    color: #f33404; 
+    color: #ff0000; 
 }
 
 .user-profile_pricing {
@@ -164,8 +164,8 @@ body{
 }
 
 .user-profile_pricing h4 {
-    font-size: 3em;
-    color: #8e1f00;
+    font-size: 2em;
+    color: green;
     margin: 10px;
 }
 
