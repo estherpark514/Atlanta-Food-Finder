@@ -36,7 +36,7 @@
       </nav>
     </header>
 
-    <main class="profile" href ="#profile">
+    <section class="profile" id="profile">
       <div class="sidebar">
         <h2>Your Reviews</h2>
         <ul class="review-list">
@@ -46,19 +46,20 @@
           <!-- Add more reviews -->
         </ul>
       </div>
+      </section>
 
-      <section class="profile">
+      <section class="profile" id="profile">
         <h1>Welcome, [Username]</h1>
         <h2>Your Favorite Restaurants</h2>
         <div class="favorite-restaurants">
           <!-- List favorite restaurants with heart icons -->
           <div class="restaurant-item">
-            <img src="{% static 'restaurant1.png' %}" alt="Restaurant 1" width="150" height="150" />
+            <img src="{% static '1.png' %}" alt="Restaurant 1" width="150" height="150" />
             <h3>Restaurant 1</h3>
             <p>Atlanta Breakfast Club</p>
           </div>
           <div class="restaurant-item">
-            <img src="{% static 'restaurant2.png' %}" alt="Restaurant 2" width="150" height="150" />
+            <img src="{% static '2.png' %}" alt="Restaurant 2" width="150" height="150" />
             <h3>Restaurant 2</h3>
             <p>The Optimist</p>
           </div>
