@@ -85,9 +85,6 @@ pip install -r requirements.txt
 
 Start the Django development server:
 
-```bash
-python manage.py runserver
-```
 
 The server will be available at `http://127.0.0.1:8000/`.
 
