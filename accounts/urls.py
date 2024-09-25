@@ -10,4 +10,5 @@ urlpatterns = [
     path('password-reset-sent/<str:reset_id>/', views.PasswordResetSent, name='password-reset-sent'),
     path('reset-password/<str:reset_id>/', views.ResetPassword, name='reset-password'),
     path('profile/', views.Profile, name='profile'),
+    path('favorite/', views.add_to_favorites, name='add_to_favorites'),
 ]

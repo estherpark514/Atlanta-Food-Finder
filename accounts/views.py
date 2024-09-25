@@ -7,6 +7,10 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.urls import reverse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import logging
 from .models import *
 
 @login_required
@@ -168,4 +172,39 @@ def ResetPassword(request, reset_id):
     return render(request, 'reset_password.html')
 
 def Profile(request):
-    return render(request, 'profile.html')
+    favorites = FavoriteRestaurant.objects.filter(user=request.user).select_related('restaurant')
+    return render(request, 'profile.html', {'favorites': favorites})
+
+logger = logging.getLogger(__name__)
+
+@csrf_exempt  # Only use this if you are handling CSRF manually
+def add_to_favorites(request):
+    if request.method == 'POST':
+        try:
+            # Load the JSON data from the request body
+            data = json.loads(request.body)
+
+            # Validate the incoming data
+            if 'place_id' not in data or 'name' not in data or 'vicinity' not in data:
+                return JsonResponse({'status': 'error', 'message': 'Missing required fields.'}, status=400)
+
+            # Get or create the restaurant object
+            restaurant, created = Restaurant.objects.get_or_create(
+                place_id=data['place_id'],
+                defaults={'name': data['name'], 'vicinity': data['vicinity']}
+            )
+
+            # Get or create the favorite restaurant entry for the current user
+            favorite, created = FavoriteRestaurant.objects.get_or_create(user=request.user, restaurant=restaurant)
+
+            # Return a success message
+            return JsonResponse({'status': 'success', 'message': 'Added to favorites!'})
+
+        except json.JSONDecodeError:
+            logger.error("JSON decode error: Invalid JSON received.")
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON format.'}, status=400)
+        except Exception as e:
+            logger.error(f"Error adding to favorites: {str(e)}")
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)

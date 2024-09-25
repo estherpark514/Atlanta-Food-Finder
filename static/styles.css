@@ -318,3 +318,16 @@ body{
     width: 100%;
     bottom: 0;
 }
+
+.bx.bxs-heart {
+    color: black; /* Default color */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.bx.bxs-heart:hover {
+    color: red; /* Change to red on hover */
+}
+
+.favorited {
+    color: red; /* Change to red when favorited */
+}
