@@ -21,13 +21,13 @@
       />
       <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: -200px">
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
         <span> Atlanta Food Finder </span></a
       >
 
       <tag class="navbar"></tag>
       <nav class="navbar">
-        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'home' %}">Home</a;>
         <a href="#Recommended">Recommended</a>
         <img
           src="{% static 'profil pic icon.png' %}"
@@ -38,6 +38,14 @@
         <a href="{% url 'profile' %}">Profile</a>
       </nav>
     </header>
+
+    <div class="search-container">
+        <form action="/search" method="get" style = "margin-left: 100px">
+            <input type="text" placeholder="Search..." name="q" class="search-input">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+
 
     <section class="Home" id="Home">
       <div class="home-content">
@@ -100,7 +108,7 @@
                   <button
                     class="user-profile_button ui button red size-xl fill"
                   >
-                    Order now
+                    Details
                   </button>
                 </div>
               </div>
@@ -141,7 +149,7 @@
                   <button
                     class="user-profile_button ui button red size-xl fill"
                   >
-                    Order now
+                    Details
                   </button>
                 </div>
               </div>
@@ -179,7 +187,7 @@
                 
                   <button
                     class="user-profile_button ui button red size-xl fill">
-                    Order now
+                    Details
                   </button>
                 </div>
               </div>
