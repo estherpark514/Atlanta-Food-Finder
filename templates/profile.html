@@ -52,10 +52,10 @@
         }
       </style>
       <div class="menu grid"  style="margin-left: 50px">
-      <div class="favorite-restaurants">
+      <div class="favorite-restaurants" style="padding: 10px" >
           {% if favorites %}
               {% for favorite in favorites %}
-                <div class="user-profile">
+                <div class="user-profile" style="margin: 5px; padding: 20px;" >
                       <h3>{{ favorite.restaurant.name }}</h3>
                       <p>Location: {{ favorite.restaurant.vicinity }}</p> <!-- Assuming 'vicinity' is part of your restaurant model -->
                   </div>
