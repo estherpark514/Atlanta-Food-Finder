@@ -19,7 +19,7 @@
         style="margin-right: 0px; margin-top: -14px"
       />
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: -200px">
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
         <span> Atlanta Food Finder </span></a
       >
 
@@ -37,8 +37,20 @@
     </header>
 
     <section class="profile" id="profile">
+      <div class="sidebar">
+        <h2>Your Reviews</h2>
+        <ul class="review-list">
+          <!-- Dynamically load user reviews here -->
+          <li><strong>Review 1:</strong> "Loved the food at XYZ!"</li>
+          <li><strong>Review 2:</strong> "Great atmosphere at ABC."</li>
+          <!-- Add more reviews -->
+        </ul>
+      </div>
+    </section>  
+
+    <section class="profile" id="profile">
       <h1>Welcome, {{ user.username }}</h1>
-      <h2>Your Favorite Restaurants</h2>
+      <h2>Below are your Favorite Restaurants</h2>
       <div class="favorite-restaurants">
           {% if favorites %}
               {% for favorite in favorites %}
