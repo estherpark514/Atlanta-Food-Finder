@@ -283,8 +283,17 @@ body{
 .profile-main {
     width: 75%;
     padding: 20px;
+<<<<<<< HEAD
+    margin-left: 30%;
+
+    
+}
+
+
+=======
     margin-left: 30%;  
 }
+>>>>>>> main
 .favorite-restaurants {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
