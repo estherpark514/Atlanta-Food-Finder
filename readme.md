@@ -81,11 +81,13 @@ cd atlanta-food-finder
 pip install -r requirements.txt
 ```
 
-### 3. Run the Development Server
+### 3. Migrate and Run the Development Server
 
 Start the Django development server:
 
 ```bash
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 
