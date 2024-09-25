@@ -19,7 +19,7 @@
         style="margin-right: 0px; margin-top: -14px"
       />
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: -200px">
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
         <span> Atlanta Food Finder </span></a
       >
 
@@ -46,25 +46,107 @@
           <!-- Add more reviews -->
         </ul>
       </div>
-      </section>
-
-      <section class="profile" id="profile">
-        <h1>Welcome, [Username]</h1>
-        <h2>Your Favorite Restaurants</h2>
+      
+      <class="profile" id="profile">
+        <h1>Welcome,</h1>
+        <h2>Below are your Favorite Restaurants</h2>
+        <style>
+          h1 {
+            margin-top: -10%;
+            margin-left: 30px;
+            padding: 0px 0px 10px;
+          }
+          h2 {
+            margin-left: 30px;
+            padding: 0px 0px 10px;
+            font-size: large;
+          }
+        </style>
         <div class="favorite-restaurants">
-          <!-- List favorite restaurants with heart icons -->
-          <div class="restaurant-item">
-            <img src="{% static '1.png' %}" alt="Restaurant 1" width="150" height="150" />
-            <h3>Restaurant 1</h3>
-            <p>Atlanta Breakfast Club</p>
+          <!-- User Profile 1 -->
+          <div class="user-profile">
+            <img
+              src="{% static '3.png' %}"
+              alt="Product Image"
+              class="user-profile_image"
+            />
+            <div class="columnrating">
+              <div class="user-profile_description">
+                <h3 class="ui heading size-headingxl">
+                  Atlanta Breakfast Club
+                </h3>
+
+                <div class="user-profile_pricing">
+                  <h5 class='heart-icon bx bxs-heart'> </h5>
+
+
+                <p class="user-profile_text ui text size-texts">
+                  This is our top reccommended restaurant for you! 
+                  Check out the place and leave a review or 
+                  add to Favourites
+                </p>
+              </div>
+              <div class="rating-container">
+                <div class="star-rating" data-rating="4.3"><!--4.3-->
+                  <div class="star" data-value="1"></div>
+                  <div class="star" data-value="2"></div>
+                  <div class="star" data-value="3"></div>
+                  <div class="star" data-value="4"></div>
+                  <div class="star" data-value="5"></div>
+                  <span class="rating-value">4.3</span>
+                </div>
+              </div>
+
+              
+                <button
+                  class="user-profile_button ui button red size-xl fill"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="restaurant-item">
-            <img src="{% static '2.png' %}" alt="Restaurant 2" width="150" height="150" />
-            <h3>Restaurant 2</h3>
-            <p>The Optimist</p>
+
+          <!-- User Profile 2 -->
+          <div class="user-profile">
+            <img
+              src="{% static '2.png' %}"
+              alt="Product Image"
+              class="user-profile_image"
+            />
+            <div class="columnrating">
+              <div class="user-profile_description">
+                <h3 class="ui heading size-headingxl">The Optimist</h3>
+
+                <div class="user-profile_pricing">
+                  <h5 class='heart-icon bx bxs-heart'> </h5>
+
+                <p class="user-profile_text ui text size-texts">
+                  This is our top reccommended restaurant for you! 
+                  Check out the place and leave a review or 
+                  add to Favourites
+                </p>
+              </div>
+              <div class="rating-container">
+                <div class="star-rating" data-rating="3.5"><!--4.5-->
+                  <div class="star" data-value="1"></div>
+                  <div class="star" data-value="2"></div>
+                  <div class="star" data-value="3"></div>
+                  <div class="star" data-value="4"></div>
+                  <div class="star" data-value="5"></div>
+                  <span class="rating-value">3.5</span>
+                </div>
+              </div>
+
+              
+                <button
+                  class="user-profile_button ui button red size-xl fill"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
           </div>
-          <!-- More restaurants can be added dynamically -->
-        </div>
       </section>
     </main>
 
