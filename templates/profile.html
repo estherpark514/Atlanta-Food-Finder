@@ -19,7 +19,7 @@
         style="margin-right: 0px; margin-top: -14px"
       />
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: -200px">
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
         <span> Atlanta Food Finder </span></a
       >
 
@@ -38,11 +38,24 @@
 
     <section class="profile" id="profile">
       <h1>Welcome, {{ user.username }}</h1>
-      <h2>Your Favorite Restaurants</h2>
+      <h2>Your Favorite Restaurants:</h2>
+      <style>
+        h1 {
+          margin-left: 50px;
+          padding: 0px 0px 10px;
+        }
+        h2 {
+          margin-left: 50px;
+          padding: 0px 0px 10px;
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+      </style>
+      <div class="menu grid"  style="margin-left: 50px">
       <div class="favorite-restaurants">
           {% if favorites %}
               {% for favorite in favorites %}
-                  <div class="restaurant-item">
+                <div class="user-profile">
                       <h3>{{ favorite.restaurant.name }}</h3>
                       <p>Location: {{ favorite.restaurant.vicinity }}</p> <!-- Assuming 'vicinity' is part of your restaurant model -->
                   </div>
@@ -51,6 +64,7 @@
               <p>You have no favorite restaurants yet.</p>
           {% endif %}
       </div>
+    </div>
     </section>
     </main>
 
