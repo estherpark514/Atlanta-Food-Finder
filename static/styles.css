@@ -283,12 +283,17 @@ body{
 .profile-main {
     width: 75%;
     padding: 20px;
+<<<<<<< HEAD
     margin-left: 30%;
 
     
 }
 
 
+=======
+    margin-left: 30%;  
+}
+>>>>>>> main
 .favorite-restaurants {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -325,4 +330,17 @@ body{
     position: static;
     width: 100%;
     bottom: 0;
+}
+
+.bx.bxs-heart {
+    color: black; /* Default color */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.bx.bxs-heart:hover {
+    color: red; /* Change to red on hover */
+}
+
+.favorited {
+    color: red; /* Change to red when favorited */
 }

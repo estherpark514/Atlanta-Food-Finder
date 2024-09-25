@@ -46,11 +46,20 @@
           <!-- Add more reviews -->
         </ul>
       </div>
+<<<<<<< HEAD
       
       <class="profile" id="profile">
         <h1>Welcome,</h1>
         <h2>Below are your Favorite Restaurants</h2>
         <style>
+=======
+    </section>  
+
+    <section class="profile" id="profile">
+      <h1>Welcome, {{ user.username }}</h1>
+      <h2>Below are your Favorite Restaurants</h2>
+      <style>
+>>>>>>> main
           h1 {
             margin-top: -180px;
             margin-left: 30px;
@@ -62,6 +71,7 @@
             font-size: large;
           }
         </style>
+<<<<<<< HEAD
         <div class="favorite-restaurants">
           <!-- User Profile 1 -->
           <div class="user-profile">
@@ -148,7 +158,23 @@
             </div>
           </div>
       </section>
+=======
+      <div class="favorite-restaurants">
+          {% if favorites %}
+              {% for favorite in favorites %}
+                  <div class="restaurant-item">
+                      <h3>{{ favorite.restaurant.name }}</h3>
+                      <p>Location: {{ favorite.restaurant.vicinity }}</p> <!-- Assuming 'vicinity' is part of your restaurant model -->
+                  </div>
+              {% endfor %}
+          {% else %}
+              <p>You have no favorite restaurants yet.</p>
+          {% endif %}
+      </div>
+    </section>
+>>>>>>> main
     </main>
+
 
     <footer class="footer">
       <p>© 2024 Atlanta Food Finder. All rights reserved.</p>
