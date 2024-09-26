@@ -82,6 +82,12 @@ pip install -r requirements.txt
 ```
 
 ### 3. Run the Development Server
+```bash
+python manage.py makemigrations accounts
+python manage.py migrate accounts
+python manage.py migrate
+python manage.py runserver
+```
 
 Start the Django development server:
 
