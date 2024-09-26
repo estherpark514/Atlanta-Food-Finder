@@ -18,34 +18,55 @@
         text-align: center;
       }
 
+      body {
+            background-image: url("{% static 'Atlanta.jpg' %}"); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
       div {
         text-align: center;
         position: relative;
+        
       }
 
-      form {
-        margin: auto;
-        color: #4c8160;
+      #main {
+        background-color: #FFF7EE;
+        border: 2px solid transparent;  
+          border-color:#edf060;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+        border-radius: 10px; 
+        margin-left: 40%;
+        margin-right: 40%;
+        margin-top: 4%;
       }
-
+      
+      img{
+        max-width: 100%;
+        height: auto;
+      }
+      
       input[type="text"],
       input[type="password"] {
-        width: 50%;
+        width: 90%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
         border: 1px solid;
+        border-radius: 9px; 
         box-sizing: border-box;
         text-align: center;
       }
 
       button {
-        width: 50%;
+        width: 90%;
         background-color: #04aa6d;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
-        border: none;
+        border-radius: 9px; 
         cursor: pointer;
       }
       button:hover {
@@ -55,28 +76,44 @@
       form {
         font-size: 15px;
       }
+
+      .signup_link {
+          margin-top: 10px;
+      }
+  
+      .signup_link a {
+          color: #04aa6d;
+          text-decoration: none;
+      }
+  
+      .signup_link a:hover {
+          text-decoration: underline;
+      }
     </style>
   </head>
 
   <body>
-    <div>
-      <img src="{% static 'profil pic icon.png' %}" alt="test" width="150" height="150" />
-    </div>
-
-    <h1>Login</h1>
-
-    {% if messages %}
+    <div id = "main">
+      <br>
+      
+         <div>
+      <img src="{% static 'profil pic icon.png' %}" alt="test" width="120" height="120" />
+      </div>
+      
+      <h1>Login</h1>
+      {% if messages %}
           {% for message in messages %}
               {% if message.tags == 'error' %}
+                  <br>
                   <center><h4 style="color: firebrick;">{{message}}</h4></center>
               {% else %}
+                  <br>
                   <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
               {% endif %}
           {% endfor %}
       {% endif %}
-
-    <br />
-    <div>
+      <br>
+      <div>
       <form method="POST">
         {% csrf_token %}
         <input
@@ -97,10 +134,30 @@
         <br />
         <button type="submit">Login</button>
         <br />
-        <a href="{% url 'register' %}"> Don't have an account?</a>
-        <br />
-        <a href="{% url 'forgot-password' %}"> Forgot Password?</a>
+
+        
       </form>
+      <div class="signup_link">
+        <p style="color:#4c8160">Not a member? <a href="{% url 'register' %}">Signup</a></p>
+        <p style="color:#4c8160">Forgot Password? <a href="{% url 'forgot-password' %}">Reset here</a></p> 
+      </div>
+      
+      <br>
     </div>
+
+    </div>
+   
+
+    
+
+    
+
+    <br />
+    
   </body>
 </html>
+
+<!-- 
+
+
+-->
