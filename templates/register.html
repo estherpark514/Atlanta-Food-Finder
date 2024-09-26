@@ -1,34 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta
-      charset="UTF-8"
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <title>Registration Form</title>
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       body {
-            background-image: url("{% static 'Atlanta.jpg' %}"); /* Replace with your image URL */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        h1 {
-        color: #4c8160;
+        background-image: url("{% static 'Atlanta.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      #main {
+        background-color: #fff7ee;
+        border: 2px solid transparent;
+        border-color: #edf060;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 50%;
+        padding: 2%;
         text-align: center;
       }
 
-      div {
-        text-align: center;
-        position: relative;
-      }
-
-      form {
-        margin: auto;
+      h1 {
         color: #4c8160;
       }
 
@@ -40,130 +46,110 @@
         margin: 8px 0;
         display: inline-block;
         border: 1px solid;
-        border-radius: 9px; 
+        border-radius: 9px;
         box-sizing: border-box;
         text-align: center;
       }
 
-      #main {
-        background-color: #FFF7EE;
-        border: 2px solid transparent;  
-          border-color:#edf060;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
-        border-radius: 10px; 
-        margin-left: 40%;
-        margin-right: 40%;
-        margin-top: 2%;
-      }
-
       button {
-        width: 50%;
+        width: 90%;
         background-color: #04aa6d;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
         border: none;
         cursor: pointer;
+        border-radius: 9px;
       }
+
       button:hover {
         opacity: 0.8;
       }
 
-      form {
-        font-size: 15px;
+      .signup_link {
+        margin-top: 10px;
       }
 
-      .signup_link {
-          margin-top: 10px;
-        }
-  
-        .signup_link a {
-          color: #04aa6d;
-          text-decoration: none;
-        }
-  
-        .signup_link a:hover {
-          text-decoration: underline;
-        }
+      .signup_link a {
+        color: #04aa6d;
+        text-decoration: none;
+      }
+
+      .signup_link a:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
 
   <body>
-    <div id = "main">
-      <br>
-  <form method="POST">
-    {% csrf_token %}
-    <div>
-      <img
-        src="{% static 'profil pic icon.png' %}"
-        width="120"
-        height="120"
-      />
-    </div>
-    <h1>Signup</h1>
-  
-    <br />
-    {% if messages %}
-      {% for message in messages %}
-          {% if message.tags == 'error' %}
-          <br>
-              <center><h4 style="color: firebrick;">{{message}}</h4></center>
-          {% else %}
-          <br>
-              <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
-          {% endif %}
-      {% endfor %}
-  {% endif %}
-    <div>
-      <input
-        type="text"
-        id="fname"
-        name="first_name"
-        placeholder="First Name"
-        required
-      />
-      <br />
-      <input
-        type="text"
-        id="lname"
-        name="last_name"
-        placeholder="Last Name"
-        required
-      />
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Email Address"
-        required
-      />
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="Username"
-        required
-      />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Create Account</button>
-      <br />
+    <div id="main">
+      <form method="POST">
+        {% csrf_token %}
+        <div>
+          <img
+            src="{% static 'profil pic icon.png' %}"
+            width="120"
+            height="120"
+          />
+        </div>
+        <h1>Signup</h1>
 
-      <div class="signup_link">
-        Already have an account? <a href="{% url 'login' %}">Login</a>
-        <p>Remember your Password? <a href="{% url 'forgot-password' %}">Reset here</a></p> 
-      </div>
-      <a href="{% url 'login' %}">  </a>
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <h4 style="color: firebrick; text-align:center;">{{ message }}</h4>
+            {% else %}
+              <h4 style="color: dodgerblue; text-align:center;">{{ message }}</h4>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        <input
+          type="text"
+          id="fname"
+          name="first_name"
+          placeholder="First Name"
+          required
+        />
+        <input
+          type="text"
+          id="lname"
+          name="last_name"
+          placeholder="Last Name"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email Address"
+          required
+        />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+
+        <button type="submit">Create Account</button>
+
+        <div class="signup_link">
+          Already have an account? <a href="{% url 'login' %}">Login</a>
+          <p>
+            Remember your Password?
+            <a href="{% url 'forgot-password' %}">Reset here</a>
+          </p>
+        </div>
+      </form>
     </div>
-    <br>
-  </form>
-    
-  </div>
-   
   </body>
 </html>
