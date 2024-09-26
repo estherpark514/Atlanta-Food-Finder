@@ -1,9 +1,6 @@
-<!--login page-->
-<!--required fields: username, password-->
-<!--include a direct link to register.html (signup) and a direct link to forgot_password.html (reset your password) -->
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta
       charset="UTF-8"
@@ -19,43 +16,43 @@
       }
 
       body {
-            background-image: url("{% static 'Atlanta.jpg' %}"); /* Replace with your image URL */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-      div {
-        text-align: center;
-        position: relative;
-        
+        background-image: url("{% static 'Atlanta.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
       }
 
       #main {
-        background-color: #FFF7EE;
-        border: 2px solid transparent;  
-          border-color:#edf060;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
-        border-radius: 10px; 
-        margin-left: 40%;
-        margin-right: 40%;
-        margin-top: 4%;
+        background-color: #fff7ee;
+        border: 2px solid transparent;
+        border-color: #edf060;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 40%;
+        padding: 2%;
+        text-align: center;
       }
-      
-      img{
-        max-width: 100%;
-        height: auto;
+
+      img {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
       }
-      
+
       input[type="text"],
       input[type="password"] {
         width: 90%;
         padding: 12px 20px;
         margin: 8px 0;
-        display: inline-block;
         border: 1px solid;
-        border-radius: 9px; 
+        border-radius: 9px;
         box-sizing: border-box;
         text-align: center;
       }
@@ -66,54 +63,46 @@
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
-        border-radius: 9px; 
+        border: none;
         cursor: pointer;
+        border-radius: 9px;
       }
+
       button:hover {
         opacity: 0.8;
       }
 
-      form {
-        font-size: 15px;
+      .signup_link {
+        margin-top: 10px;
       }
 
-      .signup_link {
-          margin-top: 10px;
-      }
-  
       .signup_link a {
-          color: #04aa6d;
-          text-decoration: none;
+        color: #04aa6d;
+        text-decoration: none;
       }
-  
+
       .signup_link a:hover {
-          text-decoration: underline;
+        text-decoration: underline;
       }
     </style>
   </head>
 
   <body>
-    <div id = "main">
-      <br>
-      
-         <div>
-      <img src="{% static 'profil pic icon.png' %}" alt="test" width="120" height="120" />
-      </div>
-      
+    <div id="main">
+      <img src="{% static 'profil pic icon.png' %}" alt="Profile Picture" />
+
       <h1>Login</h1>
+
       {% if messages %}
-          {% for message in messages %}
-              {% if message.tags == 'error' %}
-                  <br>
-                  <center><h4 style="color: firebrick;">{{message}}</h4></center>
-              {% else %}
-                  <br>
-                  <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
-              {% endif %}
-          {% endfor %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+            <h4 style="color: firebrick;">{{ message }}</h4>
+          {% else %}
+            <h4 style="color: dodgerblue;">{{ message }}</h4>
+          {% endif %}
+        {% endfor %}
       {% endif %}
-      <br>
-      <div>
+
       <form method="POST">
         {% csrf_token %}
         <input
@@ -123,7 +112,6 @@
           placeholder="Username"
           required
         />
-        <br />
         <input
           type="password"
           id="password"
@@ -131,33 +119,13 @@
           placeholder="Password"
           required
         />
-        <br />
         <button type="submit">Login</button>
-        <br />
-
-        
       </form>
+
       <div class="signup_link">
-        <p style="color:#4c8160">Not a member? <a href="{% url 'register' %}">Signup</a></p>
-        <p style="color:#4c8160">Forgot Password? <a href="{% url 'forgot-password' %}">Reset here</a></p> 
+        <p>Not a member? <a href="{% url 'register' %}">Signup</a></p>
+        <p>Forgot Password? <a href="{% url 'forgot-password' %}">Reset here</a></p>
       </div>
-      
-      <br>
     </div>
-
-    </div>
-   
-
-    
-
-    
-
-    <br />
-    
   </body>
 </html>
-
-<!-- 
-
-
--->
