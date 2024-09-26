@@ -82,12 +82,15 @@ pip install -r requirements.txt
 ```
 
 ### 3. Run the Development Server
+```bash
+python manage.py makemigrations accounts
+python manage.py migrate accounts
+python manage.py migrate
+python manage.py runserver
+```
 
 Start the Django development server:
 
-```bash
-python manage.py runserver
-```
 
 The server will be available at `http://127.0.0.1:8000/`.
 
