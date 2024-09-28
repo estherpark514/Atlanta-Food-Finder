@@ -42,14 +42,34 @@ function updateRestaurantProfile(profileNumber, restaurant) {
   const location = document.getElementById(`restaurant-description-${profileNumber}`);
   const rating = document.getElementById(`restaurant-rating-${profileNumber}`);
   const ratingValue = document.getElementById(`rating-value-${profileNumber}`);
+  const image = document.getElementById(`restaurant-image-${profileNumber}`);
+  const detailsButton = document.getElementById(`details-button-${profileNumber}`);
 
   name.textContent = restaurant.name; // Restaurant name
   location.textContent = `Located at ${restaurant.vicinity}, this restaurant is highly rated by our users!`;
-  rating.setAttribute('data-rating', restaurant.rating); 
+  rating.setAttribute('data-rating', restaurant.rating);
   ratingValue.textContent = restaurant.rating.toFixed(1);
+  if (detailsButton) {
+    detailsButton.href = `/detail/${restaurant.place_id}/`; // Construct the URL directly
+  }
 
   updateStarRatings(profileNumber, restaurant.rating);
+
+  if (Array.isArray(restaurant.photos) && restaurant.photos.length > 0) {
+    const firstPhoto = restaurant.photos[0]; // Access the first photo
+    console.log('First photo object:', firstPhoto); // Log the first photo object for inspection
+
+    // Use the getUrl method to generate the image URL
+    const imageUrl = firstPhoto.getUrl({ maxWidth: 600, maxHeight: 600 });
+    
+    image.innerHTML = `<img src="${imageUrl}" alt="${restaurant.name}" style="width:100%; height:auto;">`;
+    console.log('Image URL:', imageUrl); // Log the image URL
+  } else {
+      console.warn(`No photos available for ${restaurant.name}`);
+      image.innerHTML = `<p>No image available</p>`;
+  }
 }
+
 
 function createMarker(place) {
   const marker = new google.maps.Marker({
@@ -68,7 +88,13 @@ function createMarker(place) {
           <p>
               <i class="bx bxs-heart" style="cursor: pointer;" id="favorite-${place.place_id}" data-place-id="${place.place_id}"></i>
               <span id="favorite-text-${place.place_id}">Add to Favorites</span>
-          </p>`,
+          </p>
+          <p>
+              <a href="/detail/${place.place_id}/" style="color: black; text-decoration: none;">
+                  View Details <span style="text-transform: none">&rarr;</span>
+              </a>
+          </p>
+          `,
   });
 
   marker.addListener("click", () => {
@@ -169,3 +195,22 @@ function updateStarRatings(profileNumber, rating) {
 document.addEventListener("DOMContentLoaded", function () {
   loadGoogleMapsScript();
 });
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  fetch('/logout/', { 
+      method: 'POST', 
+      credentials: 'include',
+      headers: {
+          'X-CSRFToken': getCookie('csrftoken'), 
+      }
+  })
+  .then(response => {
+      if (response.ok) {
+          window.location.href = loginUrl;
+      } else {
+          alert('Logout failed. Please try again.');
+      }
+  })
+  .catch(error => console.error('Error:', error));
+});
+

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Armata&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
-    font-family: "Poppins", sans-serif;
+    font-family: "Armata", sans-serif;
 }
 
 :root {
@@ -248,10 +250,6 @@ body{
     vertical-align: middle;
 }
 
-
-
-
-/* Profile Page Styling */
 .profile-content {
     display: flex;
     padding: 20px;
@@ -326,3 +324,10 @@ body{
 
 .favorited {
     color: red; /* Change to red when favorited */
+}
+
+.detail-link:hover {
+    font-weight: 800;
+    text-decoration: underline; 
+    cursor: pointer;
+}

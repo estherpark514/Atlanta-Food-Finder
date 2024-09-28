@@ -10,6 +10,10 @@
     <script src="{% static 'script.js' %}" defer></script>
   </head>
 
+  <script>
+    const loginUrl = "{% url 'login' %}";
+</script>
+
   <body>
     <header class="header">
       <img
@@ -35,6 +39,10 @@
         <a href="{% url 'profile' %}">Profile</a>
       </nav>
     </header>
+    <button id="logoutBtn" class="user-profile_button ui button red size-xl fill">
+      Logout
+  </button>
+  
 
     <section class="profile" id="profile">
       <h1>Welcome, {{ user.username }}</h1>

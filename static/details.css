@@ -1,0 +1,224 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Armata&display=swap');
+
+input {
+  overflow: visible;
+}
+
+input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 80%;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*=col-] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.col-md-6, .col-md-9 {
+  position: relative;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.9rem + 2px);
+  padding: 0.45rem 0.85rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.37rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-control {
+    transition: none;
+  }
+}
+.form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #a5bdf6;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
+}
+.form-control::-webkit-input-placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+.form-control::-moz-placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+.form-control::-ms-input-placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+.form-control::placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e4e4e4;
+  opacity: 1;
+}
+
+select.form-control:focus::-ms-value {
+  color: #495057;
+  background-color: #fff;
+}
+
+select.form-control[size], select.form-control[multiple] {
+  height: auto;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.37rem;
+}
+.card > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+.card > .list-group:first-child .list-group-item:first-child {
+  border-top-left-radius: 0.37rem;
+  border-top-right-radius: 0.37rem;
+}
+.card > .list-group:last-child .list-group-item:last-child {
+  border-bottom-right-radius: 0.37rem;
+  border-bottom-left-radius: 0.37rem;
+}
+
+.border-left {
+  border-left: 1px solid #e4e4e4 !important;
+}
+.rate > input {
+  display: none; /* Hide the radio buttons */
+}
+
+.rate {
+  display: inline-block;
+  border: 0;
+}
+
+.rate > label {
+  float: right; /* Align stars to the right */
+  cursor: pointer; /* Show pointer on hover */
+}
+
+.rate > label:before {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-family: FontAwesome;
+  content: "\f005"; /* FontAwesome star */
+  margin: 0;
+  padding: 0.3rem .2rem; /* Adjust star spacing */
+}
+
+input:checked ~ label {
+  color: orange; /* Fill checked stars */
+}
+
+/* Highlighting stars on hover */
+label:hover,
+label:hover ~ label {
+  color: orange; /* Fill stars on hover */
+}
+
+/* When a star is checked, keep all stars to the left filled */
+input:checked + label:hover,
+input:checked + label:hover ~ label,
+label:hover ~ input:checked ~ label {
+  color: orange; /* Fill stars on hover if any are checked */
+}
+
+.rating-star i{
+  color: orange !important;
+}
+
+.rating-stars {
+  display: inline-block;
+  vertical-align: middle;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  white-space: nowrap;
+  clear: both;
+}
+
+.rating-stars i {
+  font-size: 14px;
+  color: #ccc;
+  display: inline;
+}
+
+.rating-stars img {
+  height: 14px;
+  max-width: none;
+}
+
+.rating-stars li {
+  display: block;
+  text-overflow: clip;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.rating-stars li.stars-active {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.rating-stars li.stars-active i {
+  color: orange;
+}
+
+.box {
+  padding: 18px;
+  background: #fff;
+  border-radius: 0.37rem;
+  border: 1px solid #e4e4e4;
+  max-width: 100%;
+  margin-bottom: 5px;
+}

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="{% static 'script.js' %}" defer></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLBtkghppVDE_9Sh29rCdHFIJOkq9F8V0&libraries=places&callback=initMap">
+    </script>
+
   </head>
 
   <body>
@@ -70,20 +74,17 @@
           class="tab-content-column tabcontent"
         >
           <div class="menu grid">
+            
             <div class="user-profile" id="restaurant-profile-1">
-              <img
-                  src="{% static '3.png' %}"
-                  alt="Product Image"
-                  class="user-profile_image"
-              />
+              <div id="restaurant-image-1"></div>
               <div class="columnrating">
                   <div class="user-profile_description">
+                    <div class="name" style="height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                       <h3 class="ui heading size-headingxl" id="restaurant-name-1">
-                          Atlanta Breakfast Club
                       </h3>
-                      <div class="user-profile_pricing">
+                    </div>
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
                           <p class="user-profile_text ui text size-texts" id="restaurant-description-1">
-                              This is our top recommended restaurant for you! Check out the place and leave a review or add to Favourites.
                           </p>
                       </div>
                       <div class="rating-container">
@@ -93,31 +94,26 @@
                               <div class="star" data-value="3"></div>
                               <div class="star" data-value="4"></div>
                               <div class="star" data-value="5"></div>
-                              <span class="rating-value" id="rating-value-1">4.3</span>
+                              <span class="rating-value" id="rating-value-1"></span>
                           </div>
                       </div>
-                      <button class="user-profile_button ui button red size-xl fill">
-                        Details
-                    </button>
+                      <a id="details-button-1" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
                   </div>
               </div>
             </div>
-          
             
             <div class="user-profile" id="restaurant-profile-2">
-              <img
-                  src="{% static '3.png' %}"
-                  alt="Product Image"
-                  class="user-profile_image"
-              />
+              <div id="restaurant-image-2"></div>
               <div class="columnrating">
                   <div class="user-profile_description">
+                    <div class="name" style="height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                       <h3 class="ui heading size-headingxl" id="restaurant-name-2">
-                          Atlanta Breakfast Club
                       </h3>
-                      <div class="user-profile_pricing">
+                    </div>
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
                           <p class="user-profile_text ui text size-texts" id="restaurant-description-2">
-                              This is our top recommended restaurant for you! Check out the place and leave a review or add to Favourites.
                           </p>
                       </div>
                       <div class="rating-container">
@@ -127,31 +123,27 @@
                               <div class="star" data-value="3"></div>
                               <div class="star" data-value="4"></div>
                               <div class="star" data-value="5"></div>
-                              <span class="rating-value" id="rating-value-2">4.3</span>
+                              <span class="rating-value" id="rating-value-2"></span>
                           </div>
                       </div>
-                      <button class="user-profile_button ui button red size-xl fill">
-                        Details
-                    </button>
+                      <a id="details-button-2" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
                   </div>
               </div>
             </div>
-          
 
             <div class="user-profile" id="restaurant-profile-3">
-              <img
-                  src="{% static '3.png' %}"
-                  alt="Product Image"
-                  class="user-profile_image"
-              />
+              <div id="restaurant-image-3"></div>
               <div class="columnrating">
                   <div class="user-profile_description">
+                    <div class="name" style="height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                       <h3 class="ui heading size-headingxl" id="restaurant-name-3">
-                          Atlanta Breakfast Club
                       </h3>
-                      <div class="user-profile_pricing">
+                    </div>
+                    
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
                           <p class="user-profile_text ui text size-texts" id="restaurant-description-3">
-                              This is our top recommended restaurant for you! Check out the place and leave a review or add to Favourites.
                           </p>
                       </div>
                       <div class="rating-container">
@@ -161,17 +153,16 @@
                               <div class="star" data-value="3"></div>
                               <div class="star" data-value="4"></div>
                               <div class="star" data-value="5"></div>
-                              <span class="rating-value" id="rating-value-3">4.3</span>
+                              <span class="rating-value" id="rating-value-3"></span>
                           </div>
                       </div>
-                      <button class="user-profile_button ui button red size-xl fill">
-                        Details
-                      </button>
+                      <a id="details-button-3" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
                   </div>
               </div>
-          </div>
-          
-
+            </div>
+            
           </div>
         </div>
       </div>

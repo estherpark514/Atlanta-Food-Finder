@@ -80,7 +80,6 @@ def LoginView(request):
 # Logs the user out and redirects to the login page
 def LogoutView(request):
     logout(request)
-
     return redirect('login')
 
 # Handles the process of initiating a password reset by sending a reset link to the user's email
