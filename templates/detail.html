@@ -110,7 +110,12 @@
                                 </div>
                                 <p style="font-size: 12px; margin: 0;">Location: {{ restaurant.vicinity }}</p>
                                 <p style="font-size: 12px; margin: 0;">Opening Hours: {% if restaurant.opening_hours != 'Not available' %}{{ restaurant.opening_hours|join:", " }}{% else %}{{ restaurant.opening_hours }}{% endif %}</p>
-                                <a id="details-button-3" class="details-button user-profile_button ui button red size-xl fill" style="font-size: 12px; margin-top: 10px;" href="#">
+                                <a id="button" class="details-button user-profile_button ui button red size-xl fill" 
+                                    style="font-size: 12px; margin-top: 10px;"
+                                    href="#"
+                                    data-place-id="{{ restaurant.restaurant_id }}"
+                                    data-name="{{ restaurant.name }}"
+                                    data-vicinity="{{ restaurant.vicinity }}">
                                     Add to Favorites
                                 </a>
                             </article>
