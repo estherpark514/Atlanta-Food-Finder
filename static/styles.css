@@ -250,11 +250,6 @@ body{
     vertical-align: middle;
 }
 
-.profile-content {
-    display: flex;
-    padding: 20px;
-    margin-top: 100px;
-}
 
 .sidebar {
     width: 25%;
@@ -277,10 +272,29 @@ body{
     padding: 20px;
 }
 
-.favorite-restaurants {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+}
+
+.favorite-restaurants, .past-comments {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding: 20px; */
+    /* margin-right: 20px;  */
+    width: calc(50% - 20px);
+}
+
+.user-profile {
+    margin: 5px 0;
+}
+
+.user-comment {
+    margin: 5px 0;
 }
 
 .restaurant-item {
