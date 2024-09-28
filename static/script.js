@@ -19,13 +19,36 @@ function initMap() {
   // Search for restaurants and add markers
   service.nearbySearch(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (let i = 0; i < results.length; i++) {
-        createMarker(results[i]);
+      const topThreeRestaurants=results
+      .filter((place) => place.rating)
+      .sort((a,b) => b.rating-a.rating)
+      .slice(0, 3);
+
+      if (topThreeRestaurants.length >= 3) {
+        updateRestaurantProfile(1, topThreeRestaurants[0]);
+        updateRestaurantProfile(2, topThreeRestaurants[1]);
+        updateRestaurantProfile(3, topThreeRestaurants[2]);
       }
+
+      results.forEach((restaurant) => createMarker(restaurant));
     } else {
       console.error("PlacesService failed: " + status);
     }
   });
+}
+
+function updateRestaurantProfile(profileNumber, restaurant) {
+  const name = document.getElementById(`restaurant-name-${profileNumber}`);
+  const location = document.getElementById(`restaurant-description-${profileNumber}`);
+  const rating = document.getElementById(`restaurant-rating-${profileNumber}`);
+  const ratingValue = document.getElementById(`rating-value-${profileNumber}`);
+
+  name.textContent = restaurant.name; // Restaurant name
+  location.textContent = `Located at ${restaurant.vicinity}, this restaurant is highly rated by our users!`;
+  rating.setAttribute('data-rating', restaurant.rating); 
+  ratingValue.textContent = restaurant.rating.toFixed(1);
+
+  updateStarRatings(profileNumber, restaurant.rating);
 }
 
 function createMarker(place) {
@@ -119,39 +142,30 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function handleStarRatings() {
-  const starRatings = document.querySelectorAll(".star-rating");
+function updateStarRatings(profileNumber, rating) {
+  const roundedRating = parseFloat(rating.toFixed(1));
+  
+  const starElements = document.querySelectorAll(`#restaurant-profile-${profileNumber} .star-rating .star`);
+  const fullStars = Math.floor(roundedRating);
+  const partialStarPercentage = (roundedRating - fullStars) * 100;
 
-  starRatings.forEach((starRating) => {
-    const rating = parseFloat(starRating.getAttribute("data-rating"));
-
-    if (isNaN(rating)) {
-      console.error("Invalid rating value");
-      return;
+  starElements.forEach((star, index) => {
+    if (index < fullStars) {
+      star.classList.add('filled');
+      star.classList.remove('partially-filled');
+      star.style.removeProperty('--partial-fill');
+    } else if (index === fullStars && partialStarPercentage > 0) {
+      star.classList.add('partially-filled');
+      star.classList.remove('filled');
+      star.style.setProperty('--partial-fill', `${partialStarPercentage}%`);
+    } else {
+      star.classList.remove('filled', 'partially-filled');
+      star.style.removeProperty('--partial-fill');
     }
-
-    const fullStars = Math.floor(rating);
-    const partialStarPercentage = (rating - fullStars) * 100;
-    // console.log(`Star percentage rounded: ${partialStarPercentage}`);
-
-    const stars = starRating.querySelectorAll(".star");
-
-    stars.forEach((star, index) => {
-      if (index < fullStars) {
-        star.classList.add("filled");
-        star.classList.remove("partially-filled");
-      } else if (index === fullStars) {
-        star.classList.add("partially-filled");
-        star.classList.remove("filled");
-        star.style.setProperty("--partial-fill", `${partialStarPercentage}%`);
-      } else {
-        star.classList.remove("filled", "partially-filled");
-      }
-    });
   });
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
-  handleStarRatings();
   loadGoogleMapsScript();
 });
