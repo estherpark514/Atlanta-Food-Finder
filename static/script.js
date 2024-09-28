@@ -50,20 +50,18 @@ function updateRestaurantProfile(profileNumber, restaurant) {
   rating.setAttribute('data-rating', restaurant.rating);
   ratingValue.textContent = restaurant.rating.toFixed(1);
   if (detailsButton) {
-    detailsButton.href = `/detail/${restaurant.place_id}/`; // Construct the URL directly
+    detailsButton.href = `/detail/${restaurant.place_id}/`;
   }
 
   updateStarRatings(profileNumber, restaurant.rating);
 
   if (Array.isArray(restaurant.photos) && restaurant.photos.length > 0) {
-    const firstPhoto = restaurant.photos[0]; // Access the first photo
-    console.log('First photo object:', firstPhoto); // Log the first photo object for inspection
-
-    // Use the getUrl method to generate the image URL
+    const firstPhoto = restaurant.photos[0];
+    console.log('First photo object:', firstPhoto);
     const imageUrl = firstPhoto.getUrl({ maxWidth: 600, maxHeight: 600 });
     
-    image.innerHTML = `<img src="${imageUrl}" alt="${restaurant.name}" style="width:100%; height:auto;">`;
-    console.log('Image URL:', imageUrl); // Log the image URL
+    image.innerHTML = `<img src="${imageUrl}" alt="${restaurant.name}" style="width:100%; height:300px;">`;
+    // console.log('Image URL:', imageUrl);
   } else {
       console.warn(`No photos available for ${restaurant.name}`);
       image.innerHTML = `<p>No image available</p>`;
@@ -132,10 +130,9 @@ function addToFavorites(place, heartIcon, favoriteText) {
   }).then((response) => {
       if (response.ok) {
           alert(`${place.name} has been added to your favorites!`);
-          // Change the heart icon's color and text
-          heartIcon.classList.add("favorited"); // Mark as favorited
-          favoriteText.textContent = 'Added to Favorite!s'; // Change button text
-          favoriteText.style.color = 'red'; // Optional: Change text color to red
+          heartIcon.classList.add("favorited");
+          favoriteText.textContent = 'Added to Favorite!s'; 
+          favoriteText.style.color = 'red'; 
       } else {
           console.error("Error adding to favorites:", response.statusText);
       }
