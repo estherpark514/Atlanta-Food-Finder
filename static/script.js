@@ -19,14 +19,55 @@ function initMap() {
   // Search for restaurants and add markers
   service.nearbySearch(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (let i = 0; i < results.length; i++) {
-        createMarker(results[i]);
+      const topThreeRestaurants=results
+      .filter((place) => place.rating)
+      .sort((a,b) => b.rating-a.rating)
+      .slice(0, 3);
+
+      if (topThreeRestaurants.length >= 3) {
+        updateRestaurantProfile(1, topThreeRestaurants[0]);
+        updateRestaurantProfile(2, topThreeRestaurants[1]);
+        updateRestaurantProfile(3, topThreeRestaurants[2]);
       }
+
+      results.forEach((restaurant) => createMarker(restaurant));
     } else {
       console.error("PlacesService failed: " + status);
     }
   });
 }
+
+function updateRestaurantProfile(profileNumber, restaurant) {
+  const name = document.getElementById(`restaurant-name-${profileNumber}`);
+  const location = document.getElementById(`restaurant-description-${profileNumber}`);
+  const rating = document.getElementById(`restaurant-rating-${profileNumber}`);
+  const ratingValue = document.getElementById(`rating-value-${profileNumber}`);
+  const image = document.getElementById(`restaurant-image-${profileNumber}`);
+  const detailsButton = document.getElementById(`details-button-${profileNumber}`);
+
+  name.textContent = restaurant.name; // Restaurant name
+  location.textContent = `Located at ${restaurant.vicinity}, this restaurant is highly rated by our users!`;
+  rating.setAttribute('data-rating', restaurant.rating);
+  ratingValue.textContent = restaurant.rating.toFixed(1);
+  if (detailsButton) {
+    detailsButton.href = `/detail/${restaurant.place_id}/`;
+  }
+
+  updateStarRatings(profileNumber, restaurant.rating);
+
+  if (Array.isArray(restaurant.photos) && restaurant.photos.length > 0) {
+    const firstPhoto = restaurant.photos[0];
+    console.log('First photo object:', firstPhoto);
+    const imageUrl = firstPhoto.getUrl({ maxWidth: 600, maxHeight: 600 });
+    
+    image.innerHTML = `<img src="${imageUrl}" alt="${restaurant.name}" style="width:100%; height:300px;">`;
+    // console.log('Image URL:', imageUrl);
+  } else {
+      console.warn(`No photos available for ${restaurant.name}`);
+      image.innerHTML = `<p>No image available</p>`;
+  }
+}
+
 
 function createMarker(place) {
   const marker = new google.maps.Marker({
@@ -45,7 +86,13 @@ function createMarker(place) {
           <p>
               <i class="bx bxs-heart" style="cursor: pointer;" id="favorite-${place.place_id}" data-place-id="${place.place_id}"></i>
               <span id="favorite-text-${place.place_id}">Add to Favorites</span>
-          </p>`,
+          </p>
+          <p>
+              <a href="/detail/${place.place_id}/" style="color: black; text-decoration: none;">
+                  View Details <span style="text-transform: none">&rarr;</span>
+              </a>
+          </p>
+          `,
   });
 
   marker.addListener("click", () => {
@@ -83,10 +130,9 @@ function addToFavorites(place, heartIcon, favoriteText) {
   }).then((response) => {
       if (response.ok) {
           alert(`${place.name} has been added to your favorites!`);
-          // Change the heart icon's color and text
-          heartIcon.classList.add("favorited"); // Mark as favorited
-          favoriteText.textContent = 'Added to Favorite!s'; // Change button text
-          favoriteText.style.color = 'red'; // Optional: Change text color to red
+          heartIcon.classList.add("favorited");
+          favoriteText.textContent = 'Added to Favorite!s'; 
+          favoriteText.style.color = 'red'; 
       } else {
           console.error("Error adding to favorites:", response.statusText);
       }
@@ -119,39 +165,49 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function handleStarRatings() {
-  const starRatings = document.querySelectorAll(".star-rating");
+function updateStarRatings(profileNumber, rating) {
+  const roundedRating = parseFloat(rating.toFixed(1));
+  
+  const starElements = document.querySelectorAll(`#restaurant-profile-${profileNumber} .star-rating .star`);
+  const fullStars = Math.floor(roundedRating);
+  const partialStarPercentage = (roundedRating - fullStars) * 100;
 
-  starRatings.forEach((starRating) => {
-    const rating = parseFloat(starRating.getAttribute("data-rating"));
-
-    if (isNaN(rating)) {
-      console.error("Invalid rating value");
-      return;
+  starElements.forEach((star, index) => {
+    if (index < fullStars) {
+      star.classList.add('filled');
+      star.classList.remove('partially-filled');
+      star.style.removeProperty('--partial-fill');
+    } else if (index === fullStars && partialStarPercentage > 0) {
+      star.classList.add('partially-filled');
+      star.classList.remove('filled');
+      star.style.setProperty('--partial-fill', `${partialStarPercentage}%`);
+    } else {
+      star.classList.remove('filled', 'partially-filled');
+      star.style.removeProperty('--partial-fill');
     }
-
-    const fullStars = Math.floor(rating);
-    const partialStarPercentage = (rating - fullStars) * 100;
-    // console.log(`Star percentage rounded: ${partialStarPercentage}`);
-
-    const stars = starRating.querySelectorAll(".star");
-
-    stars.forEach((star, index) => {
-      if (index < fullStars) {
-        star.classList.add("filled");
-        star.classList.remove("partially-filled");
-      } else if (index === fullStars) {
-        star.classList.add("partially-filled");
-        star.classList.remove("filled");
-        star.style.setProperty("--partial-fill", `${partialStarPercentage}%`);
-      } else {
-        star.classList.remove("filled", "partially-filled");
-      }
-    });
   });
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
-  handleStarRatings();
   loadGoogleMapsScript();
 });
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  fetch('/logout/', { 
+      method: 'POST', 
+      credentials: 'include',
+      headers: {
+          'X-CSRFToken': getCookie('csrftoken'), 
+      }
+  })
+  .then(response => {
+      if (response.ok) {
+          window.location.href = loginUrl;
+      } else {
+          alert('Logout failed. Please try again.');
+      }
+  })
+  .catch(error => console.error('Error:', error));
+});
+
