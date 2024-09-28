@@ -3,3 +3,5 @@ Atlanta-Food-Finder/__pycache__/
 accounts/migrations/
 accounts/.DS_Store
 .DS_Store
+reviews/__pycache__/
+reviews/migrations/
