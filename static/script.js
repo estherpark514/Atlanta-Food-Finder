@@ -139,6 +139,53 @@ function addToFavorites(place, heartIcon, favoriteText) {
   });
 }
 
+function addToFavorites(place, button) {
+  // Fetch request to add the place to favorites
+  fetch(`/favorite/`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify(place),
+  }).then((response) => {
+      if (response.ok) {
+          button.textContent = 'Added to Favorites!';
+          button.style.backgroundColor = 'green';
+          button.style.color = 'white'; 
+          button.disabled = true;
+      } else {
+          console.error("Error adding to favorites:", response.statusText);
+          alert("Failed to add to favorites. Please try again later.");
+      }
+  }).catch((error) => {
+      console.error("Network error:", error);
+      alert("There was a network issue. Please try again.");
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const favoriteButton = document.getElementById('button');
+  
+  if (favoriteButton) {
+      favoriteButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          
+          const place = {
+              place_id: this.getAttribute('data-place-id'),
+              name: this.getAttribute('data-name'),
+              vicinity: this.getAttribute('data-vicinity'),
+          };
+
+          addToFavorites(place, this);
+      });
+  } else {
+      console.error("Button element not found!");
+  }
+});
+
+
+
 
 // Function to load Google Maps API script dynamically with callback
 function loadGoogleMapsScript() {
