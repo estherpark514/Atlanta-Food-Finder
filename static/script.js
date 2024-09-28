@@ -139,7 +139,6 @@ function addToFavorites(place, heartIcon, favoriteText) {
   });
 }
 
-
 // Function to load Google Maps API script dynamically with callback
 function loadGoogleMapsScript() {
   const script = document.createElement("script");
