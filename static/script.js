@@ -104,7 +104,7 @@ function createMarker(place) {
 
           if (heartIcon) {
               heartIcon.addEventListener("click", function () {
-                  addToFavorites(place, heartIcon, favoriteText);
+                  addToFavoritesMap(place, heartIcon, favoriteText);
               });
           } else {
               console.error(`Heart icon for ${place.name} not found.`);
@@ -113,7 +113,7 @@ function createMarker(place) {
   });
 }
 
-function addToFavorites(place, heartIcon, favoriteText) {
+function addToFavoritesMap(place, heartIcon, favoriteText) {
   const restaurantData = {
       place_id: place.place_id,
       name: place.name,
@@ -131,7 +131,7 @@ function addToFavorites(place, heartIcon, favoriteText) {
       if (response.ok) {
           alert(`${place.name} has been added to your favorites!`);
           heartIcon.classList.add("favorited");
-          favoriteText.textContent = 'Added to Favorite!s'; 
+          favoriteText.textContent = 'Added to Favorites!'; 
           favoriteText.style.color = 'red'; 
       } else {
           console.error("Error adding to favorites:", response.statusText);
