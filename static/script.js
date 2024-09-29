@@ -85,7 +85,7 @@ function createMarker(place) {
           <p>Rating: ${rating}</p>
           <p>
               <i class="bx bxs-heart" style="cursor: pointer;" id="favorite-${place.place_id}" data-place-id="${place.place_id}"></i>
-              <span id="favorite-text-${place.place_id}">Add to Favorites</span>
+              <span id="favorite-text-${place.place_id}" style="cursor: pointer;">Add to Favorites</span>
           </p>
           <p>
               <a href="/detail/${place.place_id}/" style="color: black; text-decoration: none;">
@@ -96,20 +96,23 @@ function createMarker(place) {
   });
 
   marker.addListener("click", () => {
-      infoWindow.open(map, marker);
+    infoWindow.open(map, marker);
 
-      google.maps.event.addListenerOnce(infoWindow, "domready", () => {
-          const heartIcon = document.getElementById(`favorite-${place.place_id}`);
-          const favoriteText = document.getElementById(`favorite-text-${place.place_id}`);
+    google.maps.event.addListenerOnce(infoWindow, "domready", () => {
+        const heartIcon = document.getElementById(`favorite-${place.place_id}`);
+        const favoriteText = document.getElementById(`favorite-text-${place.place_id}`);
 
-          if (heartIcon) {
-              heartIcon.addEventListener("click", function () {
-                  addToFavoritesMap(place, heartIcon, favoriteText);
-              });
-          } else {
-              console.error(`Heart icon for ${place.name} not found.`);
-          }
-      });
+        if (heartIcon && favoriteText) {
+            const clickHandler = function () {
+                addToFavoritesMap(place, heartIcon, favoriteText);
+            };
+
+            heartIcon.addEventListener("click", clickHandler);
+            favoriteText.addEventListener("click", clickHandler);
+        } else {
+            console.error(`Heart icon or favorite text for ${place.name} not found.`);
+        }
+    });
   });
 }
 
@@ -131,6 +134,7 @@ function addToFavoritesMap(place, heartIcon, favoriteText) {
       if (response.ok) {
           alert(`${place.name} has been added to your favorites!`);
           heartIcon.classList.add("favorited");
+          heartIcon.style.color = 'red';
           favoriteText.textContent = 'Added to Favorites!'; 
           favoriteText.style.color = 'red'; 
       } else {
