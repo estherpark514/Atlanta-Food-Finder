@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Armata&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
-    font-family: "Poppins", sans-serif;
+    font-family: "Armata", sans-serif;
 }
 
 :root {
@@ -249,15 +251,6 @@ body{
 }
 
 
-
-
-/* Profile Page Styling */
-.profile-content {
-    display: flex;
-    padding: 20px;
-    margin-top: 100px;
-}
-
 .sidebar {
     width: 25%;
     padding: 20px;
@@ -279,10 +272,29 @@ body{
     padding: 20px;
 }
 
-.favorite-restaurants {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+}
+
+.favorite-restaurants, .past-comments {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding: 20px; */
+    /* margin-right: 20px;  */
+    width: calc(50% - 20px);
+}
+
+.user-profile {
+    margin: 5px 0;
+}
+
+.user-comment {
+    margin: 5px 0;
 }
 
 .restaurant-item {
@@ -326,4 +338,10 @@ body{
 
 .favorited {
     color: red; /* Change to red when favorited */
+}
+
+.detail-link:hover {
+    font-weight: 800;
+    text-decoration: underline; 
+    cursor: pointer;
 }
