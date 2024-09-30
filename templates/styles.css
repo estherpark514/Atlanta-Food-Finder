@@ -10,7 +10,7 @@
 }
 
 :root {
-    --bg-color:#FFF7EE;
+    --bg-color:#eff3ee;
     --second-bg-color:#2222228d;
     --text-color: rgb(0, 0, 0);
     --main-color: #c3ecb2;
@@ -322,17 +322,6 @@ body{
 }
 
 /* Footer */
-.footer {
-    text-align: center;
-    padding: 20px;
-    padding-top: 40px;
-    margin-top: 40px;
-    background-color: #222;
-    color: white;
-    position: static;
-    width: 100%;
-    bottom: 10px;
-}
 
 .bx.bxs-heart {
     color: black; /* Default color */
