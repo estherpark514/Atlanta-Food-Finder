@@ -10,6 +10,10 @@
     <script src="{% static 'script.js' %}" defer></script>
   </head>
 
+  <script>
+    const loginUrl = "{% url 'login' %}";
+  </script>
+
   <body>
     <header class="header">
       <img
@@ -36,41 +40,47 @@
       </nav>
     </header>
 
-    <section class="profile" id="profile">
-      <h1>Welcome, {{ user.username }}</h1>
-      <h2>Your Favorite Restaurants:</h2>
-      <style>
-        h1 {
-          margin-left: 50px;
-          padding: 0px 0px 10px;
-        }
-        h2 {
-          margin-left: 50px;
-          padding: 0px 0px 10px;
-          font-size: 20px;
-          margin-bottom: 20px;
-        }
-      </style>
-      <div class="menu grid"  style="margin-left: 50px">
-      <div class="favorite-restaurants" style="padding: 10px" >
-          {% if favorites %}
-              {% for favorite in favorites %}
-                <div class="user-profile" style="margin: 5px; padding: 20px;" >
-                      <h3>{{ favorite.restaurant.name }}</h3>
-                      <p>Location: {{ favorite.restaurant.vicinity }}</p> <!-- Assuming 'vicinity' is part of your restaurant model -->
-                  </div>
-              {% endfor %}
-          {% else %}
-              <p>You have no favorite restaurants yet.</p>
-          {% endif %}
+    <section class="profile" id="profile" style="padding: 2rem 5%;">
+      <h1 style="margin-bottom: 10px;">Welcome, {{ user.username }}</h1>
+      <div class="profile-content" style="margin-bottom: 10px;">
+          <div class="favorite-restaurants" style="padding: 1.5%; width: 40%;">
+              <h2>Your Favorite Restaurants:</h2>
+              {% if favorites %}
+                  {% for favorite in favorites %}
+                      <div class="user-profile" style="margin: 15px 0; padding: 20px;">
+                          <h3>{{ favorite.restaurant.name }}</h3>
+                          <p>Location: {{ favorite.restaurant.vicinity }}</p>
+                      </div>
+                  {% endfor %}
+              {% else %}
+                  <p>You have no favorite restaurants yet.</p>
+              {% endif %}
+          </div>
+          
+          <div class="past-comments" style="padding: 1.5%; width: 40%;">
+              <h2>Your Past Comments:</h2>
+              {% if comments %}
+                  {% for comment in comments %}
+                      <div class="user-profile" style="margin: 15px 0; padding: 20px;">
+                          <h3>{{ comment.restaurant }}</h3>
+                          <p>{{ comment.review }}</p>
+                          <p>{{ comment.rating }}/5.0</p>
+                          <p>{{ comment.subject }}</p>
+                          <p>Posted on: {{ comment.created_at }}</p>
+                      </div>
+                  {% endfor %}
+              {% else %}
+                  <p>You have no favorite restaurants yet.</p>
+              {% endif %}
+              
+          </div>
       </div>
-    </div>
-    </section>
-    </main>
-
-
-    <footer class="footer">
+      <button id="logoutBtn" class="user-profile_button ui button red size-xl fill">
+        Logout
+      </button>
+  </section>
+  <footer class="footer">
       <p>© 2024 Atlanta Food Finder. All rights reserved.</p>
-    </footer>
-  </body>
+  </footer>
+</body>
 </html>

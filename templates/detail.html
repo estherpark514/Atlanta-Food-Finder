@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% static 'script.js' %}" defer></script>
+        <link rel="stylesheet" href="{% static 'details.css' %}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="{% static 'styles.css' %}" />
+        <!-- <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet"> -->
+        <title>{{ restaurant.name }}</title>
+    </head>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ratingElements = document.querySelectorAll('.star-rating-small');
+    
+            ratingElements.forEach(ratingElement => {
+                const ratingValue = parseFloat(ratingElement.dataset.rating);
+                const starElements = ratingElement.querySelectorAll('.star');
+                const fullStars = Math.floor(ratingValue);
+                const partialStarPercentage = (ratingValue - fullStars) * 100;
+    
+                starElements.forEach((star, index) => {
+                    if (index < fullStars) {
+                        star.classList.add('filled');
+                    } else if (index === fullStars && partialStarPercentage > 0) {
+                        star.classList.add('partially-filled');
+                        star.style.setProperty('--partial-fill', `${partialStarPercentage}%`);
+                    } else {
+                        star.classList.remove('filled', 'partially-filled');
+                    }
+                });
+            });
+        });
+    </script>
+    <body>
+        <header class="header">
+            <img
+            src="{% static 'Logo.png' %}"
+            width="70"
+            height="70"
+            style="margin-right: 0px; margin-top: -14px"
+            />
+    
+            <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
+            <span> Atlanta Food Finder </span></a
+            >
+    
+            <nav class="navbar">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}#Recommended">Recommended</a>
+            <img
+                src="{% static 'profil pic icon.png' %}"
+                width="40"
+                height="40"
+                style="float: right; margin-left: 10px; margin-top: -14px"
+            />
+            <a href="{% url 'profile' %}">Profile</a>
+            </nav>
+        </header>
+        {% block content %}
+        <section class="section-content padding-y bg">
+            <div class="container">                
+                <div class="card mb-4" style="display: flex; justify-content: center; align-items: center; margin: 0; padding: 0;">
+                    <div class="row no-gutters" style="display: flex; justify-content: center; align-items: center; margin: 0; padding: 0; width: 100%;">
+                        <aside class="col-md-6" style="display: flex; justify-content: center; align-items: center;">
+                            <article class="gallery-wrap">
+                                <div class="img-big-wrap mainImage" style="margin-top: 30px;">
+                                    <center>
+                                        <img id="mainImage" src="{{ first_image_url }}" alt="{{ restaurant.name }}" style="width:80%; height:auto;">
+                                    </center>
+                                </div>
+                            </article>                           
+                        </aside>
+                                                     
+                        <main class="col-md-6 border-left" style="display: flex; justify-content: center; align-items: center; padding: 0; margin: 0;">
+                            <article class="content-body" style="margin: 30px; height: 300px; display: flex; flex-direction: column; gap: 10px; justify-content: center; align-items: flex-start;">
+                                <h3 style="font-size: 25px; font-weight: 900; margin: 0;">{{ restaurant.name }}</h3>
+                                <div class="rating-container-small" style="display: flex; align-items: center;">
+                                    <div class="star-rating-small" data-rating="{{ restaurant.rating }}" id="{{ restaurant.restaurant_id }}" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="star" data-value="1"></div>
+                                        <div class="star" data-value="2"></div>
+                                        <div class="star" data-value="3"></div>
+                                        <div class="star" data-value="4"></div>
+                                        <div class="star" data-value="5"></div>
+                                        <span style="font-size: 12px; font-weight: 400; margin-left: 5px;">{{ restaurant.total_ratings }} reviews</span>
+                                    </div>
+                                </div>
+                                <div class="container-small" style="display: flex; align-items: center;">
+                                    <span style="font-size: 12px;">Price: </span>
+                                    <span style="font-size: 12px; margin-left: 5px;">
+                                        {% if restaurant.price_level == 0 %}
+                                            Free
+                                        {% elif restaurant.price_level == 1 %}
+                                            Inexpensive
+                                        {% elif restaurant.price_level == 2 %}
+                                            Moderate
+                                        {% elif restaurant.price_level == 3 %}
+                                            Expensive
+                                        {% elif restaurant.price_level == 4 %}
+                                            Very Expensive
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <p style="font-size: 12px; margin: 0;">Location: {{ restaurant.vicinity }}</p>
+                                <p style="font-size: 12px; margin: 0;">Opening Hours: {% if restaurant.opening_hours != 'Not available' %}{{ restaurant.opening_hours|join:", " }}{% else %}{{ restaurant.opening_hours }}{% endif %}</p>
+                                <a id="button" class="details-button user-profile_button ui button red size-xl fill" 
+                                    style="font-size: 12px; margin-top: 10px;"
+                                    href="#"
+                                    data-place-id="{{ restaurant.restaurant_id }}"
+                                    data-name="{{ restaurant.name }}"
+                                    data-vicinity="{{ restaurant.vicinity }}">
+                                    Add to Favorites
+                                </a>
+                            </article>
+                        </main>
+                        
+                        
+                    </div>
+                </div>
+                
+
+                <div class="row" style="margin-top: 30px; width: 100%;">
+                    <div class="col-md-9">
+                        <form action="{% url 'submit_review' restaurant_id=restaurant.id %}" method="POST">
+                            {% csrf_token %}
+                            <p style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Write Your Review</p>
+                        
+                            <div>
+                                <p style="font-size: 12px; margin-bottom: 5px; padding: 0;">How do you rate this restaurant?</p>
+                                <div class="rate" style="margin-bottom: 10px; padding: 0;">
+                                    <input type="radio" name="rating" id="rating5" value="5" required />
+                                    <label for="rating5" title="5 stars"></label>
+                                    <input type="radio" name="rating" id="rating4" value="4" required />
+                                    <label for="rating4" title="4 stars"></label>
+                                    <input type="radio" name="rating" id="rating3" value="3" required />
+                                    <label for="rating3" title="3 stars"></label>
+                                    <input type="radio" name="rating" id="rating2" value="2" required />
+                                    <label for="rating2" title="2 stars"></label>
+                                    <input type="radio" name="rating" id="rating1" value="1" required />
+                                    <label for="rating1" title="1 star"></label>
+                                </div>
+                                                         
+                                <br>
+                                <p style="font-size: 12px; margin-bottom: 5px;">Review Titles:</p>
+                                <input type="text" class="form-control" name="subject" required style="width:100%; margin-bottom:10px;">
+                                <br>
+                                <p style="font-size: 12px; margin-bottom: 5px;">Review:</p>
+                                <textarea name="review" rows="4" class="form-control" required style="margin-bottom: 10px;"></textarea>
+                                <br>
+                                {% if user.is_authenticated %}
+                                    <button type="submit" class="details-button user-profile_button ui button red size-xl fill" style="margin: 0; font-size: 12px;">Submit Review</button>
+                                {% else %}
+                                    <p>You must be logged in to post a review. <span><a href="{% url 'login' %}">Login now</a></span></p>
+                                {% endif %}
+                            </div>    
+                        </form>
+                        
+                        <br>
+                        <header class="section-heading">
+                            <h3 style="margin-bottom: 10px;">Customer Reviews</h3>
+                            <div class="rating-star" style="margin-bottom: 10px;">
+                                <span>
+                                    <i class="fa fa-star{% if restaurant.averageReview < 0.5 %}-o{% elif restaurant.averageReview >= 0.5 and restaurant.averageReview < 1 %}-half-o{% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if restaurant.averageReview < 1.5 %}-o{% elif restaurant.averageReview >= 1.5 and restaurant.averageReview < 2 %}-half-o{% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if restaurant.averageReview < 2.5 %}-o{% elif restaurant.averageReview >= 2.5 and restaurant.averageReview < 3 %}-half-o{% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if restaurant.averageReview < 3.5 %}-o{% elif restaurant.averageReview >= 3.5 and restaurant.averageReview < 4 %}-half-o{% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if restaurant.averageReview < 4.5 %}-o{% elif restaurant.averageReview >= 4.5 and restaurant.averageReview < 5 %}-half-o{% endif %}" aria-hidden="true"></i>
+                                    <span>{{ restaurant.countReview }} reviews</span>
+                                </span>
+                            </div>
+                        </header>
+
+                        {% for review in reviews %}
+                            <article class="box mb-3">
+                                <div class="icontext">
+                                    <div class="text" style="display:flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px;">
+                                        <span>{{ review.user.username }}</span>
+                                        <span class="date float-md-right" style="color: #969696; font-size: 12px; display: flex;">{{ review.updated_at }}</span>
+                                    </div>
+                                    <div class="rating-star" style="margin-bottom: 10px;">
+                                        <span>
+                                            <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o{% endif %}" aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o{% endif %}" aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o{% endif %}" aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o{% endif %}" aria-hidden="true"></i>
+                                            <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o{% endif %}" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div style="font-size: 15px; font-weight: 400; margin-bottom: 5px;">{{ review.subject }}</div>
+                                    <div style="font-size: 12px;">{{ review.review }}</div>
+                                </div>
+                            </article>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <footer class="footer">
+            <p>© 2024 Atlanta Food Finder. All rights reserved.</p>
+        </footer>
+    </body>
+</html>
