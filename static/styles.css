@@ -13,7 +13,7 @@
 
 :root {
     --bg-color:#FFF7EE;
-    --second-bg-color:#2222228d;
+    --second-bg-color:#000000e3;
     --text-color: rgb(0, 0, 0);
     --main-color: #c3ecb2;
 }
@@ -25,6 +25,7 @@ body{
     margin: 0;
     display:flex;
     flex-direction: column;
+    flex: 1;
 }
 .header{
     position: fixed;
@@ -322,13 +323,12 @@ body{
 .footer {
     text-align: center;
     padding: 20px;
-    background-color: #222;
+    background-color: var(--second-bg-color);
     color: white;
-    position: static;
     width: 100%;
-    margin-top: 5%;
-    margin-bottom: 0;
+    margin-top: auto; 
 }
+
 
 .bx.bxs-heart {
     color: black; /* Default color */
