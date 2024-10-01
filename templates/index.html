@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="{% static 'script.js' %}" defer></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLBtkghppVDE_9Sh29rCdHFIJOkq9F8V0&libraries=places&callback=initMap">
+    </script>
+
   </head>
 
   <body>
@@ -40,11 +44,12 @@
     </header>
 
     <div class="search-container">
-        <form action="/search" method="get" style = "margin-left: 100px">
-            <input type="text" placeholder="Search..." name="q" class="search-input">
-            <button type="submit" class="search-btn">Search</button>
-        </form>
-    </div>
+  <form id="search-form" style="margin-left: 100px">
+    <input type="text" placeholder="Search for restaurants..." id="search-input" class="search-input">
+    <button type="submit" class="search-btn">Search</button>
+    <button type="button" id="reset-btn" class="search-btn">Reset</button>
+  </form>
+</div>
 
 
     <section class="Home" id="Home">
@@ -70,131 +75,101 @@
           class="tab-content-column tabcontent"
         >
           <div class="menu grid">
-            <!-- User Profile 1 -->
-            <div class="user-profile">
-              <img
-                src="{% static '3.png' %}"
-                alt="Product Image"
-                class="user-profile_image"
-              />
+            
+            <div class="user-profile" id="restaurant-profile-1">
+              <div id="restaurant-image-1"></div>
               <div class="columnrating">
-                <div class="user-profile_description">
-                  <h3 class="ui heading size-headingxl">
-                    Atlanta Breakfast Club
-                  </h3>
-
-                  <div class="user-profile_pricing">
-                    <h4 class='heart-icon bx bxs-heart' data-restaurant-id="1"></h4>
-
-
-                  <p class="user-profile_text ui text size-texts">
-                    This is our top reccommended restaurant for you! 
-                    Check out the place and leave a review or 
-                    add to Favourites
-                  </p>
-                </div>
-                <div class="rating-container">
-                  <div class="star-rating" data-rating="4.3"><!--4.3-->
-                    <div class="star" data-value="1"></div>
-                    <div class="star" data-value="2"></div>
-                    <div class="star" data-value="3"></div>
-                    <div class="star" data-value="4"></div>
-                    <div class="star" data-value="5"></div>
-                    <span class="rating-value">4.3</span>
+                  <div class="user-profile_description">
+                    <div class="name" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px; height: 70px;">
+                      <h3 class="ui heading size-headingxl" id="restaurant-name-1">
+                      </h3>
+                    </div>
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
+                          <p class="user-profile_text ui text size-texts" id="restaurant-description-1">
+                          </p>
+                      </div>
+                      <div class="rating-container">
+                          <div class="star-rating" data-rating="4.3" id="restaurant-rating-1">
+                              <div class="star" data-value="1"></div>
+                              <div class="star" data-value="2"></div>
+                              <div class="star" data-value="3"></div>
+                              <div class="star" data-value="4"></div>
+                              <div class="star" data-value="5"></div>
+                              <span class="rating-value" id="rating-value-1"></span>
+                          </div>
+                      </div>
+                      <a id="details-button-1" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
                   </div>
-                </div>
-
-                
-                  <button
-                    class="user-profile_button ui button red size-xl fill"
-                  >
-                    Details
-                  </button>
-                </div>
+              </div>
+            </div>
+            
+            <div class="user-profile" id="restaurant-profile-2">
+              <div id="restaurant-image-2"></div>
+              <div class="columnrating">
+                  <div class="user-profile_description">
+                    <div class="name" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px; height: 70px;">
+                      <h3 class="ui heading size-headingxl" id="restaurant-name-2">
+                      </h3>
+                    </div>
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
+                          <p class="user-profile_text ui text size-texts" id="restaurant-description-2">
+                          </p>
+                      </div>
+                      <div class="rating-container">
+                          <div class="star-rating" data-rating="4.3" id="restaurant-rating-2">
+                              <div class="star" data-value="1"></div>
+                              <div class="star" data-value="2"></div>
+                              <div class="star" data-value="3"></div>
+                              <div class="star" data-value="4"></div>
+                              <div class="star" data-value="5"></div>
+                              <span class="rating-value" id="rating-value-2"></span>
+                          </div>
+                      </div>
+                      <a id="details-button-2" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
+                  </div>
               </div>
             </div>
 
-            <!-- User Profile 2 -->
-            <div class="user-profile">
-              <img
-                src="{% static '2.png' %}"
-                alt="Product Image"
-                class="user-profile_image"
-              />
+            <div class="user-profile" id="restaurant-profile-3">
+              <div id="restaurant-image-3"></div>
               <div class="columnrating">
-                <div class="user-profile_description">
-                  <h3 class="ui heading size-headingxl">The Optimist</h3>
-
-                  <div class="user-profile_pricing">
-                    <h4 class='heart-icon bx bxs-heart' data-restaurant-id="1"></h4>
-
-                  <p class="user-profile_text ui text size-texts">
-                    This is our top reccommended restaurant for you! 
-                    Check out the place and leave a review or 
-                    add to Favourites
-                  </p>
-                </div>
-                <div class="rating-container">
-                  <div class="star-rating" data-rating="3.5"><!--4.5-->
-                    <div class="star" data-value="1"></div>
-                    <div class="star" data-value="2"></div>
-                    <div class="star" data-value="3"></div>
-                    <div class="star" data-value="4"></div>
-                    <div class="star" data-value="5"></div>
-                    <span class="rating-value">3.5</span>
+                  <div class="user-profile_description">
+                    <div class="name" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px; height: 70px;">
+                      <h3 class="ui heading size-headingxl" id="restaurant-name-3">
+                      </h3>
+                    </div>
+                    
+                      <div class="user-profile_pricing" style="margin-bottom: 10px;">
+                          <p class="user-profile_text ui text size-texts" id="restaurant-description-3">
+                          </p>
+                      </div>
+                      <div class="rating-container">
+                          <div class="star-rating" data-rating="4.3" id="restaurant-rating-3">
+                              <div class="star" data-value="1"></div>
+                              <div class="star" data-value="2"></div>
+                              <div class="star" data-value="3"></div>
+                              <div class="star" data-value="4"></div>
+                              <div class="star" data-value="5"></div>
+                              <span class="rating-value" id="rating-value-3"></span>
+                          </div>
+                      </div>
+                      <a id="details-button-3" class="details-button user-profile_button ui button red size-xl fill" href="#">
+                        Detail
+                      </a>
                   </div>
-                </div>
-
-                
-                  <button
-                    class="user-profile_button ui button red size-xl fill"
-                  >
-                    Details
-                  </button>
-                </div>
               </div>
             </div>
-
-            <!-- User Profile 3 -->
-            <div class="user-profile">
-              <img
-                src="{% static '1.png' %}"
-                alt="Product Image"
-                class="user-profile_image"
-              />
-              <div class="columnrating">
-                <div class="user-profile_description">
-                  <h3 class="ui heading size-headingxl">Ecco Midtown</h3>
-                  <div class="user-profile_pricing">
-                    <h4 class='heart-icon bx bxs-heart' data-restaurant-id="1"></h4>
-
-                  <p class="user-profile_text ui text size-texts">
-                    This is our top reccommended restaurant for you! 
-                    Check out the place and leave a review or 
-                    add to Favourites
-                  </p>
-                </div>
-                <div class="rating-container">
-                  <div class="star-rating" data-rating="4.6"><!--4.8-->
-                    <div class="star" data-value="1"></div>
-                    <div class="star" data-value="2"></div>
-                    <div class="star" data-value="3"></div>
-                    <div class="star" data-value="4"></div>
-                    <div class="star" data-value="5"></div>
-                    <span class="rating-value">4.6</span>
-                  </div>
-                </div>
-                
-                  <button
-                    class="user-profile_button ui button red size-xl fill">
-                    Details
-                  </button>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
     </section>
+    <footer class="footer">
+      <p>© 2024 Atlanta Food Finder. All rights reserved.</p>
+    </footer>
   </body>
 </html>

@@ -10,7 +10,7 @@
 }
 
 :root {
-    --bg-color:#FFF7EE;
+    --bg-color:#eff3ee;
     --second-bg-color:#2222228d;
     --text-color: rgb(0, 0, 0);
     --main-color: #c3ecb2;
@@ -57,7 +57,8 @@ body{
 
 }
 .navbar a:hover{
-    color: var(--main-color);
+    color: black;
+    text-shadow: #07471f;
 }
 
 .navbar a.active{
@@ -86,29 +87,50 @@ body{
     border-radius: 15px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .user-profile:hover {
     transform: translateY(-10px);
 }
 
+.user-heart-icon {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    font-size: 1.5em;
+    color: rgb(255, 21, 21);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.user-heart-icon:hover {
+    transform: scale(1.2);
+    color: #ff0000;
+    cursor: pointer;
+}
+
 .user-profile_image {
+    padding: 2%;
+    border-radius:5%;
     width: 100%;
     height: auto;
+    position: relative;
 }
 
 .columnrating {
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 .user-profile_description {
     text-align: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .user-profile_description h3 {
     font-size: 1.5em;
-    margin: 10px 0;
+    /* margin: 10px 0; */
     color: #333;
 }
 
@@ -123,7 +145,7 @@ body{
 .user-profile_rating {
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    /* margin: 10px 0; */
 }
 
 .user-profile_rating input[type="radio"] {
@@ -142,14 +164,29 @@ body{
 }
 
 /* Pricing Section */
+
+.heart-icon {
+    font-size: 0.3em; 
+    color: rgb(255, 21, 21);
+    display: inline-block;
+    margin: 5px 5px 5px 5px; /* Add some spacing around the heart */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.heart-icon:hover {
+    transform: scale(1.2);
+    color: #ff0000; 
+}
+
 .user-profile_pricing {
     text-align: center;
 }
 
 .user-profile_pricing h4 {
-    font-size: 1.25em;
-    color: #0a311e;
-    margin: 10px 0;
+    font-size: 2em;
+    color: green;
+    margin: 10px;
 }
 
 .user-profile_button {
@@ -167,39 +204,134 @@ body{
     background-color: #07471f;
 }
 
-.search-container {
+.rating-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 100px;
-    width: 100%
 }
 
-.search-input {
-    width: 300px;
-    padding: 100px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 7px 0 0 7px;
-    outline: none;
+.star-rating {
+    position: relative;
+    display: flex;
+    font-size: 2em;
 }
 
-.search-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 0 7px 7px 0;
-    cursor: pointer;
+.star {
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome; 
+    color: lightgray; 
+    width: 1em;
+    height: 2em;
+    overflow: hidden;
 }
 
-.search-btn:hover {
-    background-color: #45a049;
+.star::before {
+    content: "\2605";
+    display: block;
 }
 
-@media (max-width: 600px) {
-    .search-input {
-        width: 300px
-    }
+.star.filled::before {
+    color: gold;
+}
+
+.star.partially-filled::before {
+    content: "\2605"; 
+    display: block;
+    color: lightgray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.star.partially-filled::after {
+    content: "\2605";
+    display: block;
+    color: gold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--partial-fill);
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.rating-value {
+    font-size: 0.8em;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+
+/* Profile Page Styling */
+.profile-content {
+    display: flex;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+}
+
+.review-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review-list li {
+    margin-bottom: 15px;
+}
+
+.profile-main {
+    width: 75%;
+    padding: 20px;
+}
+
+.favorite-restaurants {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.restaurant-item {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.restaurant-item:hover {
+    transform: scale(1.05);
+}
+
+.restaurant-item img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+
+.bx.bxs-heart {
+    color: black; /* Default color */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.bx.bxs-heart:hover {
+    color: red; /* Change to red on hover */
+}
+
+.favorited {
+    color: red; /* Change to red when favorited */
 }

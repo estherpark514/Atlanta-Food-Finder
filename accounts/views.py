@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from reviews.models import ReviewRating
 import json
 import logging
 from .models import *
@@ -80,7 +81,6 @@ def LoginView(request):
 # Logs the user out and redirects to the login page
 def LogoutView(request):
     logout(request)
-
     return redirect('login')
 
 # Handles the process of initiating a password reset by sending a reset link to the user's email
@@ -173,7 +173,10 @@ def ResetPassword(request, reset_id):
 
 def Profile(request):
     favorites = FavoriteRestaurant.objects.filter(user=request.user).select_related('restaurant')
-    return render(request, 'profile.html', {'favorites': favorites})
+    comments = ReviewRating.objects.filter(user=request.user)  # Fetch the user's comments
+    
+    return render(request, 'profile.html', {'favorites': favorites, 'comments': comments})
+
 
 logger = logging.getLogger(__name__)
 
