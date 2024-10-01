@@ -139,15 +139,16 @@
     <body onload="initMap1()">
         <header class="header">
             <img
-            src="{% static 'Logo.png' %}"
-            width="70"
-            height="70"
-            style="margin-right: 0px; margin-top: -14px"
-            />
-    
-            <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
-            <span> Atlanta Food Finder </span></a
-            >
+        src="{% static 'Logo.png' %}"
+        width="70"
+        height="70"
+        style="margin-right: 0px; margin-top: -14px; border-radius: 0.5em"
+      />
+      <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
+
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 100px; position: fixed;">
+        <span><b> Atlanta Food Finder </b></span></a
+      >
     
             <nav class="navbar">
             <a href="{% url 'home' %}">Home</a>
@@ -188,7 +189,8 @@
                                         <div class="star" data-value="4"></div>
                                         <div class="star" data-value="5"></div>
                                         <span style="font-size: 12px; font-weight: 400; margin-left: 5px;">{{ restaurant.total_ratings }} reviews</span>
-                                        <a href="https://www.google.com/maps/place/?q=place_id={{ restaurant.restaurant_id }}" target="_blank" style="font-size: 12px; font-weight: 400; margin-left: 5px;">View Google Reviews</a>
+                                        <a href="https://www.google.com/maps/place/?q=place_id:{{ restaurant.name }}" target="_blank" style="font-size: 12px; font-weight: 400; margin-left: 5px;">View Google Reviews</a>
+
                                     </div>
                                 </div>
                                 <div class="container-small" style="display: flex; align-items: center;">

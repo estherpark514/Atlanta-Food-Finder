@@ -20,11 +20,12 @@
         src="{% static 'Logo.png' %}"
         width="70"
         height="70"
-        style="margin-right: 0px; margin-top: -14px"
+        style="margin-right: 0px; margin-top: -14px; border-radius: 0.5em"
       />
+      <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
-        <span> Atlanta Food Finder </span></a
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 100px; position: fixed;">
+        <span><b> Atlanta Food Finder </b></span></a
       >
 
       <nav class="navbar">
@@ -40,10 +41,10 @@
       </nav>
     </header>
 
-    <section class="profile" id="profile" style="padding: 2rem 5%;">
+    <section class="profile" id="profile" style="padding: 2%;">
       <h1 style="margin-bottom: 10px;">Welcome, {{ user.username }}</h1>
       <div class="profile-content" style="margin-bottom: 10px;">
-          <div class="favorite-restaurants" style="padding: 1.5%; width: 40%;">
+          <div class="favorite-restaurants" style="padding: 1.5%; width: 60%;">
               <h2>Your Favorite Restaurants:</h2>
               {% if favorites %}
                   {% for favorite in favorites %}
@@ -57,7 +58,7 @@
               {% endif %}
           </div>
           
-          <div class="past-comments" style="padding: 1.5%; width: 40%;">
+          <div class="past-comments" style="padding: 2%; width: 40%;">
               <h2>Your Past Comments:</h2>
               {% if comments %}
                   {% for comment in comments %}
@@ -70,7 +71,7 @@
                       </div>
                   {% endfor %}
               {% else %}
-                  <p>You have no favorite restaurants yet.</p>
+                  <p>You have no reviews yet.</p>
               {% endif %}
               
           </div>
