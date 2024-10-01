@@ -87,12 +87,21 @@
         {% csrf_token %}
         <div>
           <img
-            src="{% static 'profil pic icon.png' %}"
+            src="{% static 'Logo.png' %}"
             width="120"
             height="120"
+            style="border-radius: 0.5em; margin-bottom: 0.5em"
           />
         </div>
-        <h1>Signup</h1>
+  
+      <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
+
+      <a href="{% url 'home' %}" class="logo" style="text-align: center">
+        <span style="margin-bottom: 0.5em"><b> Atlanta Food Finder </b></span></a>
+        <p style="margin-bottom: 2em">Find the Best Restaurants in Atlanta</p>
+      
+
+        <h2>Sign Up</h2>
 
         {% if messages %}
           {% for message in messages %}
