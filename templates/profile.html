@@ -47,9 +47,9 @@
               <h2>Your Favorite Restaurants:</h2>
               {% if favorites %}
                   {% for favorite in favorites %}
-                      <div class="user-profile" style="margin: 15px 0; padding: 20px;">
+                      <div class="user-profile" style="margin: 15px 0; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
                           <h3>{{ favorite.restaurant.name }}</h3>
-                          <p>Location: {{ favorite.restaurant.vicinity }}</p>
+                          <a href="/detail/{{ favorite.restaurant.place_id }}/" class="details-button user-profile_button ui button red size-xl fill" style="display: inline-block; padding: 10px 15px;">View Details</a>
                       </div>
                   {% endfor %}
               {% else %}

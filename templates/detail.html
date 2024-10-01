@@ -11,10 +11,52 @@
         <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="{% static 'styles.css' %}" />
-        <!-- <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet"> -->
+        <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLBtkghppVDE_9Sh29rCdHFIJOkq9F8V0&libraries=places&callback=initMap1"
+                onerror="console.error('Google Maps API failed to load.');">
+        </script>
         <title>{{ restaurant.name }}</title>
     </head>
     <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Check if this cookie string begins with the name we want
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function addToFavorites(place, button) {
+            fetch(`/favorite/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify(place),
+            }).then((response) => {
+                if (response.ok) {
+                    button.textContent = 'Added to Favorites!';
+                    button.style.backgroundColor = 'green';
+                    button.style.color = 'white'; 
+                    button.disabled = true;
+                } else {
+                    console.error("Error adding to favorites:", response.statusText);
+                    alert("Failed to add to favorites. Please try again later.");
+                }
+            }).catch((error) => {
+                console.error("Network error:", error);
+                alert("There was a network issue. Please try again.");
+            });
+        }
         document.addEventListener("DOMContentLoaded", function () {
             const ratingElements = document.querySelectorAll('.star-rating-small');
     
@@ -35,9 +77,66 @@
                     }
                 });
             });
+
+            const favoriteButton = document.getElementById('fav-button');
+            // console.log("Favorite Button:", favoriteButton);
+            if (favoriteButton) {
+                favoriteButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    const place = {
+                        place_id: this.getAttribute('data-place-id'),
+                        name: this.getAttribute('data-name'),
+                        vicinity: this.getAttribute('data-vicinity'),
+                    };
+
+                    addToFavorites(place, this);
+                });
+            } else {
+                console.error("Button element not found!");
+            }
         });
+        
+        let detailMap;
+
+        function initMap1() {
+            console.log("initMap function called.");
+            console.log("Restaurant Latitude:", "{{ restaurant.latitude }}");
+            console.log("Restaurant Longitude:", "{{ restaurant.longitude }}");
+            const atlanta = { lat: 33.749, lng: -84.388 };
+            console.log("Initializing map with center:", atlanta);
+            
+            // Initialize the map
+            detailMap = new google.maps.Map(document.getElementById("detailMap"), {
+                center: atlanta,
+                zoom: 12,
+            });
+
+            // Parse latitude and longitude
+            const restaurantLatitude = parseFloat("{{ restaurant.latitude }}");
+            const restaurantLongitude = parseFloat("{{ restaurant.longitude }}");
+            const restaurantVicinity = "{{ restaurant.vicinity }}";
+
+            console.log("Restaurant Latitude:", restaurantLatitude);
+            console.log("Restaurant Longitude:", restaurantLongitude);
+
+            if (!isNaN(restaurantLatitude) && !isNaN(restaurantLongitude)) {
+                const restaurantLocation = { lat: restaurantLatitude, lng: restaurantLongitude };
+
+                const marker = new google.maps.Marker({
+                    position: restaurantLocation,
+                    map: detailMap,
+                    title: restaurantVicinity, 
+                });
+
+                detailMap.setCenter(restaurantLocation);
+            } else {
+                console.error('Invalid restaurant coordinates:', restaurantLatitude, restaurantLongitude);
+            }
+        }
+
     </script>
-    <body>
+    <body onload="initMap1()">
         <header class="header">
             <img
             src="{% static 'Logo.png' %}"
@@ -64,7 +163,8 @@
         </header>
         {% block content %}
         <section class="section-content padding-y bg">
-            <div class="container">                
+            <div class="container">   
+                <div id="detailMap" style="height: 500px; width: 100%; margin-bottom: 10px;"></div>             
                 <div class="card mb-4" style="display: flex; justify-content: center; align-items: center; margin: 0; padding: 0;">
                     <div class="row no-gutters" style="display: flex; justify-content: center; align-items: center; margin: 0; padding: 0; width: 100%;">
                         <aside class="col-md-6" style="display: flex; justify-content: center; align-items: center;">
@@ -88,6 +188,7 @@
                                         <div class="star" data-value="4"></div>
                                         <div class="star" data-value="5"></div>
                                         <span style="font-size: 12px; font-weight: 400; margin-left: 5px;">{{ restaurant.total_ratings }} reviews</span>
+                                        <a href="https://www.google.com/maps/place/?q=place_id={{ restaurant.restaurant_id }}" target="_blank" style="font-size: 12px; font-weight: 400; margin-left: 5px;">View Google Reviews</a>
                                     </div>
                                 </div>
                                 <div class="container-small" style="display: flex; align-items: center;">
@@ -108,9 +209,12 @@
                                         {% endif %}
                                     </span>
                                 </div>
-                                <p style="font-size: 12px; margin: 0;">Location: {{ restaurant.vicinity }}</p>
+                                <p style="font-size: 12px; margin: 0;">Address: {{ restaurant.vicinity }}</p>
+                                <p style="font-size: 12px; margin: 0;">Location: {{ restaurant.location }}</p>
+                                <p style="font-size: 12px; margin: 0;">Contact Info: {% if restaurant.phone_number %}{{ restaurant.phone_number }}{% else %}Not available{% endif %}</p>
+                                <p style="font-size: 12px; margin: 0;">Cuisine Type: {% if restaurant.cuisine_type %}{{ restaurant.cuisine_type }}{% else %}Not available{% endif %}</p> 
                                 <p style="font-size: 12px; margin: 0;">Opening Hours: {% if restaurant.opening_hours != 'Not available' %}{{ restaurant.opening_hours|join:", " }}{% else %}{{ restaurant.opening_hours }}{% endif %}</p>
-                                <a id="button" class="details-button user-profile_button ui button red size-xl fill" 
+                                <a id="fav-button" class="details-button user-profile_button ui button red size-xl fill" 
                                     style="font-size: 12px; margin-top: 10px;"
                                     href="#"
                                     data-place-id="{{ restaurant.restaurant_id }}"

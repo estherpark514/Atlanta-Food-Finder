@@ -9,16 +9,21 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from reviews.models import ReviewRating
+from reviews.models import ReviewRating, Restaurant
 import json
 import logging
 from .models import *
 
-@login_required
-
 # Renders the home page (index.html) if the user is logged in
+@login_required
 def Home(request):
-    return render(request, 'index.html')
+    restaurants = Restaurant.objects.all()
+    # print(f"Total restaurants: {restaurants.count()}") 
+    # for restaurant in restaurants:
+    #     region = getattr(restaurant, 'region', 'Not available')
+    #     print(f"Name: {restaurant.name}, Region: {restaurant.restaurant_id}")
+    return render(request, 'index.html', {'restaurants': restaurants})
+
 
 # Handles user registration, including validation and account creation
 def RegisterView(request):
