@@ -43,13 +43,70 @@
       </nav>
     </header>
 
-    <div class="search-container">
-  <form id="search-form" style="margin-left: 100px">
-    <input type="text" placeholder="Search for restaurants..." id="search-input" class="search-input">
-    <button type="submit" class="search-btn">Search</button>
-    <button type="button" id="reset-btn" class="search-btn">Reset</button>
-  </form>
-</div>
+    <form id="search-form" style="margin-left: 100px">
+      <input type="text" placeholder="Search for restaurants..." id="search-input" class="search-input">
+      
+      <select id="cuisine-type" class="filter-dropdown">
+          <option value="">Cuisine Type</option>
+          <option value="American">American</option>
+          <option value="Barbecue">Barbecue</option>
+          <option value="Chinese">Chinese</option>
+          <option value="French">French</option>
+          <option value="Hamburger">Hamburger</option>
+          <option value="Indian">Indian</option>
+          <option value="Italian">Italian</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Pizza">Pizza</option>
+          <option value="Seafood">Seafood</option>
+          <option value="Steak">Steak</option>
+          <option value="Sushi">Sushi</option>
+          <option value="Thai">Thai</option>
+          <!-- Add more cuisines as needed -->
+      </select>
+      
+      <select id="location" class="filter-dropdown">
+        <option value="">Location</option>
+        <option value="Candler Park">Candler Park</option>
+        <option value="Cabbagetown">Cabbagetown</option>
+        <option value="Centennial Park District">Centennial Park District</option>
+        <option value="Fairlie-Poplar">Fairlie-Poplar</option>
+        <option value="Hotel District">Hotel District</option>
+        <option value="Inman Park">Inman Park</option>
+        <option value="Marietta Street NorthWest">Marietta Street Northwest</option>
+        <option value="Memorial Drive Southeast">Memorial Drive Southeast</option>
+        <option value="Midtown Atlanta">Midtown Atlanta</option>
+        <option value="Peachtree Center">Peachtree Center</option>
+        <option value="Poncey Highland">Poncey Highland</option>
+        <option value="SoNo">SoNo</option>
+      </select>
+      
+      
+      <select id="ratings" class="filter-dropdown">
+          <option value="">Ratings</option>
+          <option value="5">5.0</option>
+          <option value="4.5">4.5+</option>
+          <option value="4">4.0+</option>
+          <option value="3.5">3.5+</option>
+          <option value="3">3.0+</option>
+          <option value="2.5">2.5+</option>
+          <option value="2">2.0+</option>
+      </select>
+      
+      <select id="distance" class="filter-dropdown">
+          <option value="">Distance</option>
+          <option value="0.5">500 m</option>
+          <option value="1">1 km</option>
+          <option value="5">5 km</option>
+          <option value="7">7 km</option>
+          <option value="10">10 km</option>
+
+      </select>
+  
+      <button type="submit" class="search-btn">Search</button>
+      <button type="button" id="reset-btn" class="search-btn">Reset</button>
+    </form>
+  
 
 
     <section class="Home" id="Home">
@@ -99,7 +156,7 @@
                           </div>
                       </div>
                       <a id="details-button-1" class="details-button user-profile_button ui button red size-xl fill" href="#">
-                        Detail
+                        Details
                       </a>
                   </div>
               </div>
@@ -128,7 +185,7 @@
                           </div>
                       </div>
                       <a id="details-button-2" class="details-button user-profile_button ui button red size-xl fill" href="#">
-                        Detail
+                        Details
                       </a>
                   </div>
               </div>
@@ -158,7 +215,7 @@
                           </div>
                       </div>
                       <a id="details-button-3" class="details-button user-profile_button ui button red size-xl fill" href="#">
-                        Detail
+                        Details
                       </a>
                   </div>
               </div>
