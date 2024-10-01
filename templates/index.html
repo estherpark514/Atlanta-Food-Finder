@@ -25,8 +25,8 @@
       />
       <!--<a href="#Home" class="logo"> <span> Atlanta Food Finder </span></a>-->
 
-      <a href="{% url 'home' %}" class="logo" style="margin-left: 80px; position: fixed;">
-        <span> Atlanta Food Finder </span></a
+      <a href="{% url 'home' %}" class="logo" style="margin-left: 100px; position: fixed;">
+        <span><b> Atlanta Food Finder </b></span></a
       >
 
       <tag class="navbar"></tag>
@@ -42,6 +42,20 @@
         <a href="{% url 'profile' %}">Profile</a>
       </nav>
     </header>
+
+    <section class="Home" id="Home">
+      <div class="home-content">
+        <h1 style="padding-top: 0.1em; padding-bottom: 1em">Find the Perfect Spot in Atlanta 👀</h1>
+        <style>
+          h1 {
+            text-align: center;
+            padding: 0px 0px 10px;
+          }
+        </style>
+
+        
+      </div>
+    </section>
 
     <form id="search-form" style="margin-left: 100px">
       <input type="text" placeholder="Search for restaurants..." id="search-input" class="search-input">
@@ -108,20 +122,8 @@
     </form>
   
 
-
-    <section class="Home" id="Home">
-      <div class="home-content">
-<!--         <h1 style="padding-top: 1em">Find the Perfect Spot in Atlanta</h1> -->
-        <style>
-          h1 {
-            text-align: center;
-            padding: 0px 0px 10px;
-          }
-        </style>
-
-        <div id="map" style="height: 500px; width: 100%"></div>
-      </div>
-    </section>
+    <div id="map" style="height: 500px; width: 100%; margin-top: 1em"></div>
+  
 
     <section class="Recommended" id="Recommended">
       <div class="menu-section _content">
