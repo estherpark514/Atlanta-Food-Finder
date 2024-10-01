@@ -13,7 +13,7 @@
 
 :root {
     --bg-color:#FFF7EE;
-    --second-bg-color:#2222228d;
+    --second-bg-color:#000000e3;
     --text-color: rgb(0, 0, 0);
     --main-color: #c3ecb2;
 }
@@ -21,6 +21,11 @@ body{
     background: var(--bg-color);
     color: var(--text-color);
     padding-top: 150px;
+    min-height: 100vh;
+    margin: 0;
+    display:flex;
+    flex-direction: column;
+    flex: 1;
 }
 .header{
     position: fixed;
@@ -318,14 +323,12 @@ body{
 .footer {
     text-align: center;
     padding: 20px;
-    padding-top: 40px;
-    margin-top: 40px;
-    background-color: #222;
+    background-color: var(--second-bg-color);
     color: white;
-    position: static;
     width: 100%;
-    bottom: 10px;
+    margin-top: auto; 
 }
+
 
 .bx.bxs-heart {
     color: black; /* Default color */
