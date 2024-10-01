@@ -1,4 +1,6 @@
 let map;
+let restaurantsArray = []; // Array to store restaurant objects
+let markersArray = []; // Array to store all markers for easy removal
 
 function initMap() {
   // Initialize the map, centered on Atlanta
@@ -16,26 +18,29 @@ function initMap() {
     type: ["restaurant"],
   };
 
-  // Search for restaurants and add markers
-  service.nearbySearch(request, (results, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      const topThreeRestaurants=results
-      .filter((place) => place.rating)
-      .sort((a,b) => b.rating-a.rating)
-      .slice(0, 3);
-
-      if (topThreeRestaurants.length >= 3) {
-        updateRestaurantProfile(1, topThreeRestaurants[0]);
-        updateRestaurantProfile(2, topThreeRestaurants[1]);
-        updateRestaurantProfile(3, topThreeRestaurants[2]);
+    // Search for restaurants and add markers
+    service.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        const topThreeRestaurants = results
+          .filter((place) => place.rating)
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 3);
+  
+        if (topThreeRestaurants.length >= 3) {
+          updateRestaurantProfile(1, topThreeRestaurants[0]);
+          updateRestaurantProfile(2, topThreeRestaurants[1]);
+          updateRestaurantProfile(3, topThreeRestaurants[2]);
+        }
+  
+        results.forEach((restaurant) => {
+          restaurantsArray.push(restaurant); // Add restaurant to array
+          createMarker(restaurant); // Create a marker for each restaurant
+        });
+      } else {
+        console.error("PlacesService failed: " + status);
       }
-
-      results.forEach((restaurant) => createMarker(restaurant));
-    } else {
-      console.error("PlacesService failed: " + status);
-    }
-  });
-}
+    });
+  }
 
 function updateRestaurantProfile(profileNumber, restaurant) {
   const name = document.getElementById(`restaurant-name-${profileNumber}`);
@@ -45,7 +50,7 @@ function updateRestaurantProfile(profileNumber, restaurant) {
   const image = document.getElementById(`restaurant-image-${profileNumber}`);
   const detailsButton = document.getElementById(`details-button-${profileNumber}`);
 
-  name.textContent = restaurant.name; // Restaurant name
+  name.textContent = restaurant.name;
   location.textContent = `Located at ${restaurant.vicinity}, this restaurant is highly rated by our users!`;
   rating.setAttribute('data-rating', restaurant.rating);
   ratingValue.textContent = restaurant.rating.toFixed(1);
@@ -57,64 +62,97 @@ function updateRestaurantProfile(profileNumber, restaurant) {
 
   if (Array.isArray(restaurant.photos) && restaurant.photos.length > 0) {
     const firstPhoto = restaurant.photos[0];
-    console.log('First photo object:', firstPhoto);
     const imageUrl = firstPhoto.getUrl({ maxWidth: 600, maxHeight: 600 });
-    
+
     image.innerHTML = `<img src="${imageUrl}" alt="${restaurant.name}" style="width:100%; height:300px;">`;
-    // console.log('Image URL:', imageUrl);
   } else {
-      console.warn(`No photos available for ${restaurant.name}`);
-      image.innerHTML = `<p>No image available</p>`;
+    image.innerHTML = `<p>No image available</p>`;
   }
 }
 
-
 function createMarker(place) {
   const marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location,
-      title: place.name,
+    map: map,
+    position: place.geometry.location,
+    title: place.name,
   });
 
   const rating = place.rating ? `${place.rating} / 5` : "N/A";
 
   const infoWindow = new google.maps.InfoWindow({
-      content: `
-          <h3>${place.name}</h3>
-          <p>${place.vicinity}</p>
-          <p>Rating: ${rating}</p>
-          <p>
-              <i class="bx bxs-heart" style="cursor: pointer;" id="favorite-${place.place_id}" data-place-id="${place.place_id}"></i>
-              <span id="favorite-text-${place.place_id}" style="cursor: pointer;">Add to Favorites</span>
-          </p>
-          <p>
-              <a href="/detail/${place.place_id}/" style="color: black; text-decoration: none;">
-                  View Details <span style="text-transform: none">&rarr;</span>
-              </a>
-          </p>
-          `,
+    content: `
+      <h3>${place.name}</h3>
+      <p>${place.vicinity}</p>
+      <p>Rating: ${rating}</p>
+      <p>
+          <i class="bx bxs-heart" style="cursor: pointer;" id="favorite-${place.place_id}" data-place-id="${place.place_id}"></i>
+          <span id="favorite-text-${place.place_id}" style="cursor: pointer;">Add to Favorites</span>
+      </p>
+      <p>
+          <a href="/detail/${place.place_id}/" style="color: black; text-decoration: none;">
+              View Details <span style="text-transform: none">&rarr;</span>
+          </a>
+      </p>
+    `,
   });
 
   marker.addListener("click", () => {
     infoWindow.open(map, marker);
 
     google.maps.event.addListenerOnce(infoWindow, "domready", () => {
-        const heartIcon = document.getElementById(`favorite-${place.place_id}`);
-        const favoriteText = document.getElementById(`favorite-text-${place.place_id}`);
+      const heartIcon = document.getElementById(`favorite-${place.place_id}`);
+      const favoriteText = document.getElementById(`favorite-text-${place.place_id}`);
 
-        if (heartIcon && favoriteText) {
-            const clickHandler = function () {
-                addToFavoritesMap(place, heartIcon, favoriteText);
-            };
+      if (heartIcon && favoriteText) {
+        const clickHandler = function () {
+          addToFavoritesMap(place, heartIcon, favoriteText);
+        };
 
-            heartIcon.addEventListener("click", clickHandler);
-            favoriteText.addEventListener("click", clickHandler);
-        } else {
-            console.error(`Heart icon or favorite text for ${place.name} not found.`);
-        }
+        heartIcon.addEventListener("click", clickHandler);
+        favoriteText.addEventListener("click", clickHandler);
+      } else {
+        console.error(`Heart icon or favorite text for ${place.name} not found.`);
+      }
     });
   });
+
+  markersArray.push(marker);
 }
+
+// Function to filter restaurants by search query
+function filterRestaurants(query) {
+  clearMarkers(); // Clear existing markers from the map
+
+  // Filter restaurants by query (case-insensitive)
+  const filteredRestaurants = restaurantsArray.filter((restaurant) =>
+    restaurant.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  // Create markers for the filtered restaurants
+  filteredRestaurants.forEach((restaurant) => createMarker(restaurant));
+}
+
+// Function to clear all existing markers from the map
+function clearMarkers() {
+  markersArray.forEach((marker) => {
+    marker.setMap(null);
+  });
+  markersArray = []; // Reset the markers array
+}
+
+// Event listener for search form submission
+document.getElementById("search-form").addEventListener("submit", (event) => {
+  event.preventDefault(); // Prevent the form from submitting the traditional way
+  const query = document.getElementById("search-input").value; // Get the query from the search input
+  filterRestaurants(query); // Filter and display matching restaurants
+});
+
+// Event listener for reset button
+document.getElementById("reset-btn").addEventListener("click", () => {
+  document.getElementById("search-input").value = ""; // Clear search input
+  clearMarkers(); // Clear current markers
+  restaurantsArray.forEach((restaurant) => createMarker(restaurant)); // Reload all restaurants on the map
+});
 
 function addToFavoritesMap(place, heartIcon, favoriteText) {
   const restaurantData = {
