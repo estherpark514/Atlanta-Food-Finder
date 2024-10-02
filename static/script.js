@@ -19,28 +19,28 @@ function initMap() {
   };
 
     // Search for restaurants and add markers
-  service.nearbySearch(request, (results, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      const topThreeRestaurants = results
-        .filter((place) => place.rating)
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 3);
-
-      if (topThreeRestaurants.length >= 3) {
-        updateRestaurantProfile(1, topThreeRestaurants[0]);
-        updateRestaurantProfile(2, topThreeRestaurants[1]);
-        updateRestaurantProfile(3, topThreeRestaurants[2]);
+    service.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        const topThreeRestaurants = results
+          .filter((place) => place.rating)
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 3);
+  
+        if (topThreeRestaurants.length >= 3) {
+          updateRestaurantProfile(1, topThreeRestaurants[0]);
+          updateRestaurantProfile(2, topThreeRestaurants[1]);
+          updateRestaurantProfile(3, topThreeRestaurants[2]);
+        }
+  
+        results.forEach((restaurant) => {
+          restaurantsArray.push(restaurant); // Add restaurant to array
+          createMarker(restaurant); // Create a marker for each restaurant
+        });
+      } else {
+        console.error("PlacesService failed: " + status);
       }
-
-      results.forEach((restaurant) => {
-        restaurantsArray.push(restaurant); // Add restaurant to array
-        createMarker(restaurant); // Create a marker for each restaurant
-      });
-    } else {
-      console.error("PlacesService failed: " + status);
-    }
-  });
-}
+    });
+  }
 
 function updateRestaurantProfile(profileNumber, restaurant) {
   const name = document.getElementById(`restaurant-name-${profileNumber}`);
@@ -119,99 +119,38 @@ function createMarker(place) {
   markersArray.push(marker);
 }
 
-const locationToRestaurantsMap = {
-  "Candler Park": ["Fox Bros. Bar-B-Q"],
-  "Cabbagetown": ["Agave Restaurant"],
-  "Centennial Park District": ["McCormick & Schmick's Seafood & Steak"],
-  "Fairlie-Poplar": ["Thrive"],
-  "Hotel District": ["Max Lager's Wood-Fired Grill & Brewery"],
-  "Inman Park": ["The Vortex Bar & Grill", "Sotto Sotto Restaurant"],
-  "Marietta Street NorthWest": ["STATS Brewpub", "Ruth's Chris Steak House"],
-  "Memorial Drive Southeast": ["Six Feet Under Pub & Fish House - Grant Park"],
-  "Midtown Atlanta": ["The Varsity", "Mary Mac's Tea Room", "The Vortex Bar & Grill", "South City Kitchen Midtown", "Ecco Midtown"],
-  "Peachtree Center": ["Hard Rock Cafe", "The Sun Dial Restaurant, Bar & View", "Ray's In the City"],
-  "Poncey Highland": ["TWO urban licks"],
-  "SoNo": ["Shakespeare Tavern Playhouse"],
-};
+// Function to filter restaurants by search query
+function filterRestaurants(query) {
+  clearMarkers(); // Clear existing markers from the map
 
-function filterRestaurants() {
-  clearMarkers();
+  const selectedLocation = document.getElementById("location").value.trim(); // Get the selected location
+  const selectedRating = document.getElementById("ratings").value; // Get the selected rating
 
-  const query = document.getElementById("search-input").value.toLowerCase();
-  const cuisine = document.getElementById("cuisine-type").value;
-  const location = document.getElementById("location").value.trim();
-  const ratingFilter = document.getElementById("ratings").value;
-  const distanceFilter = document.getElementById("distance").value;
+  // Get the list of restaurant names for the selected location from the hardcoded map
+  let restaurantNamesToShow = locationToRestaurantsMap[selectedLocation] || [];
 
-  let restaurantNamesToShow = Object.keys(locationToRestaurantsMap).includes(location)
-    ? locationToRestaurantsMap[location]
-    : [];
-
+  // Filter restaurants by query (case-insensitive), location, and rating
   const filteredRestaurants = restaurantsArray.filter((restaurant) => {
-    const matchesQuery = restaurant.name.toLowerCase().includes(query);
-    const matchesCuisine = cuisine ? restaurant.cuisine_type === cuisine : true;
+    const matchesQuery = restaurant.name.toLowerCase().includes(query.toLowerCase());
 
-    console.log("Restaurant Object:", restaurant);
-
-    const restaurantLocation = restaurant.region ? restaurant.region.trim().toLowerCase() : '';
-    console.log(restaurant.region);
-    const matchesLocation = restaurantNamesToShow.length > 0 
+    // If a location is selected, filter based on restaurant names in the selected location
+    const matchesLocation = selectedLocation
       ? restaurantNamesToShow.includes(restaurant.name)
       : true;
-    const matchesRating = ratingFilter ? restaurant.rating >= ratingFilter : true;
-    const matchesDistance = distanceFilter ? checkDistance(restaurant.geometry.location, distanceFilter) : true;
 
-    console.log({
-      name: restaurant.name,
-      matchesQuery,
-      matchesCuisine,
-      matchesLocation,
-      restaurantLocation,
-      matchesRating,
-      matchesDistance,
-      restaurantLocation,
-      selectedLocation: location
-    });
+    // If a rating is selected, filter based on the restaurant's rating
+    const matchesRating = selectedRating
+      ? restaurant.rating >= parseFloat(selectedRating)
+      : true;
 
-    return matchesQuery && matchesCuisine && matchesLocation && matchesRating && matchesDistance;
+    return matchesQuery && matchesLocation && matchesRating;
   });
 
   // Create markers for the filtered restaurants
   filteredRestaurants.forEach((restaurant) => createMarker(restaurant));
-
-  // Check if any restaurants were found
-  if (filteredRestaurants.length === 0) {
-    console.log("No restaurants match the current filter criteria.");
-  }
 }
 
 
-function checkDistance(restaurantLocation, distanceFilter) {
-  const userLocation = { lat: 33.749, lng: -84.388 }; 
-  const distance = google.maps.geometry.spherical.computeDistanceBetween(
-    new google.maps.LatLng(userLocation.lat, userLocation.lng),
-    restaurantLocation
-  );
-  console.log("distance")
-  return distance <= distanceFilter * 1000;
-}
-
-// Event listener for search form submission
-document.getElementById("search-form").addEventListener("submit", (event) => {
-  event.preventDefault(); // Prevent the form from submitting the traditional way
-  filterRestaurants(); // Filter and display matching restaurants
-});
-
-// Event listener for reset button
-document.getElementById("reset-btn").addEventListener("click", () => {
-  document.getElementById("search-input").value = "";
-  document.getElementById("cuisine-type").selectedIndex = 0;
-  document.getElementById("location").selectedIndex = 0;
-  document.getElementById("ratings").selectedIndex = 0;
-  document.getElementById("distance").selectedIndex = 0;
-  clearMarkers(); // Clear current markers
-  restaurantsArray.forEach((restaurant) => createMarker(restaurant)); 
-});
 
 // Function to clear all existing markers from the map
 function clearMarkers() {
@@ -262,52 +201,67 @@ function addToFavoritesMap(place, heartIcon, favoriteText) {
   });
 }
 
-// function addToFavorites(place, button) {
-//   // Fetch request to add the place to favorites
-//   fetch(`/favorite/`, {
-//       method: "POST",
-//       headers: {
-//           "Content-Type": "application/json",
-//           "X-CSRFToken": getCookie("csrftoken"),
-//       },
-//       body: JSON.stringify(place),
-//   }).then((response) => {
-//       if (response.ok) {
-//           button.textContent = 'Added to Favorites!';
-//           button.style.backgroundColor = 'green';
-//           button.style.color = 'white'; 
-//           button.disabled = true;
-//       } else {
-//           console.error("Error adding to favorites:", response.statusText);
-//           alert("Failed to add to favorites. Please try again later.");
-//       }
-//   }).catch((error) => {
-//       console.error("Network error:", error);
-//       alert("There was a network issue. Please try again.");
-//   });
-// }
+function addToFavorites(place, button) {
+  // Fetch request to add the place to favorites
+  fetch(`/favorite/`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify(place),
+  }).then((response) => {
+      if (response.ok) {
+          button.textContent = 'Added to Favorites!';
+          button.style.backgroundColor = 'green';
+          button.style.color = 'white'; 
+          button.disabled = true;
+      } else {
+          console.error("Error adding to favorites:", response.statusText);
+          alert("Failed to add to favorites. Please try again later.");
+      }
+  }).catch((error) => {
+      console.error("Network error:", error);
+      alert("There was a network issue. Please try again.");
+  });
+}
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   console.log("DOM fully loaded and parsed");
-//   const favoriteButton = document.getElementById('fav-button');
-//   console.log("Favorite Button:", favoriteButton); // This should log the button element if it exists
-
-//   if (favoriteButton) {
-//       favoriteButton.addEventListener('click', function(event) {
-//           event.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+  const favoriteButton = document.getElementById('button');
+  
+  if (favoriteButton) {
+      favoriteButton.addEventListener('click', function(event) {
+          event.preventDefault();
           
-//           const place = {
-//               place_id: this.getAttribute('data-place-id'),
-//               name: this.getAttribute('data-name'),
-//               vicinity: this.getAttribute('data-vicinity'),
-//           };
+          const place = {
+              place_id: this.getAttribute('data-place-id'),
+              name: this.getAttribute('data-name'),
+              vicinity: this.getAttribute('data-vicinity'),
+          };
 
-//           addToFavorites(place, this);
-//       });
-//   } else {
-//       console.error("Button element not found!");
-//   }
-// });
+          addToFavorites(place, this);
+      });
+  } else {
+      console.error("Button element not found!");
+  }
+});
+
+const locationToRestaurantsMap = {
+  "Candler Park": ["Fox Bros. Bar-B-Q"],
+  "Cabbagetown": ["Agave Restaurant"],
+  "Centennial Park District": ["McCormick & Schmick's Seafood & Steak"],
+  "Fairlie-Poplar": ["Thrive"],
+  "Hotel District": ["Max Lager's Wood-Fired Grill & Brewery"],
+  "Inman Park": ["The Vortex Bar & Grill", "Sotto Sotto Restaurant"],
+  "Marietta Street NorthWest": ["STATS Brewpub", "Ruth's Chris Steak House"],
+  "Memorial Drive Southeast": ["Six Feet Under Pub & Fish House - Grant Park"],
+  "Midtown Atlanta": ["The Varsity", "Mary Mac's Tea Room", "The Vortex Bar & Grill", "South City Kitchen Midtown", "Ecco Midtown"],
+  "Peachtree Center": ["Hard Rock Cafe", "The Sun Dial Restaurant, Bar & View", "Ray's In the City"],
+  "Poncey Highland": ["TWO urban licks"],
+  "SoNo": ["Shakespeare Tavern Playhouse"],
+};
+
+
 
 // Function to load Google Maps API script dynamically with callback
 function loadGoogleMapsScript() {
@@ -379,4 +333,3 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   })
   .catch(error => console.error('Error:', error));
 });
-
