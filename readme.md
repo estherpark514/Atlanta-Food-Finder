@@ -63,6 +63,12 @@ We might add more HTML pages as we go along. If you make new files, you can upda
 ### `index.html`
 - **Purpose:** The main page shown after a successful login.
 
+### `profile.html`
+- **Purpose:** Displays user-specific information, including favorite restaurants and past comments/reviews.
+
+### `detail.html`
+- **Purpose:** Allows the user to view information on a given restaurant and navigate to a Google Reviews page.
+
 ## Running Django Locally
 
 Follow these steps to set up and run the Django project locally:
