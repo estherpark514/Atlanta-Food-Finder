@@ -1,5 +1,9 @@
 # Atlanta Food Finder
 
+## Project Links
+- **Github Repo:** https://github.com/estherpark514/Atlanta-Food-Finder/
+- **Team Website:** https://sites.google.com/view/2340group6project/home
+
 ## Folder Structure
 
 ### `Atlanta-Food-Finder`
@@ -62,6 +66,12 @@ We might add more HTML pages as we go along. If you make new files, you can upda
 
 ### `index.html`
 - **Purpose:** The main page shown after a successful login.
+
+### `profile.html`
+- **Purpose:** Displays user-specific information, including favorite restaurants and past comments/reviews.
+
+### `detail.html`
+- **Purpose:** Allows the user to view information on a given restaurant and navigate to a Google Reviews page.
 
 ## Running Django Locally
 
