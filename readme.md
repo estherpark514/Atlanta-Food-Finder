@@ -1,5 +1,9 @@
 # Atlanta Food Finder
 
+## Project Links
+- **Github Repo:** https://github.com/estherpark514/Atlanta-Food-Finder/
+- **Team Website:** https://sites.google.com/view/2340group6project/home
+
 ## Folder Structure
 
 ### `Atlanta-Food-Finder`
