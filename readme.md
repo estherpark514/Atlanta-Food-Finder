@@ -1,7 +1,3 @@
-Here's a rewritten version of your Atlanta Food Finder description:
-
----
-
 # Atlanta Food Finder
 
 Atlanta is home to a vibrant food scene, offering countless incredible dining options. With so many choices, deciding where to eat can be overwhelming. That’s why we created **Atlanta Food Finder** — a web application designed to help you search for and discover amazing restaurants! 
