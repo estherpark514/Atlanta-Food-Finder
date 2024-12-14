@@ -1,120 +1,30 @@
+Here's a rewritten version of your Atlanta Food Finder description:
+
+---
+
 # Atlanta Food Finder
 
-## Project Links
-- **Github Repo:** https://github.com/estherpark514/Atlanta-Food-Finder/
-- **Team Website:** https://sites.google.com/view/2340group6project/home
+Atlanta is home to a vibrant food scene, offering countless incredible dining options. With so many choices, deciding where to eat can be overwhelming. That’s why we created **Atlanta Food Finder** — a web application designed to help you search for and discover amazing restaurants! 
 
-## Folder Structure
+Using our platform, you can:
+- Explore nearby restaurants and their locations on an interactive map.
+- Learn more about each restaurant, including menu highlights and reviews.
+- Save your favorite restaurants for future visits.
+- Write and read reviews to share and gather recommendations.
 
-### `Atlanta-Food-Finder`
-- **Description:** The main application of the project. This is where the core functionality of the app is implemented
+Feel free to explore this web application and make your dining decisions easier and more enjoyable!
 
-### `templates`
-- **Description:** Contains all HTML files used in the project
+## About the Project
 
-### `static`
-- **Description:** Includes static files like stylesheets
+This website is fully developed using **Django**, ensuring a robust and efficient backend to power your dining adventures.
 
-### `accounts`
-- **Description:** Contains all the user authentication backend components
+## Contributors
 
-## HTML Pages
-
-Feel free to rename the HTML file if you need to, and just give the team a heads-up so we can update the backend. You can also delete any comments in the file if that helps.
-
-We might add more HTML pages as we go along. If you make new files, you can update the README, but if the names are clear enough, you don't have to. The README is here to give the team a quick overview of the project structure before we all dive into coding.
-
-### `register.html`
-- **Purpose:** Signup page for new users.
-- **Required Fields:**
-  - **First Name** 
-  - **Last Name**
-  - **Username** 
-  - **Email** 
-  - **Password** 
-- **Recommended Link:**
-  - **Login:** Direct link to `login.html` for users with an existing account.
-
-### `login.html`
-- **Purpose:** The login page.
-- **Required Fields:**
-  - **Username** 
-  - **Password** 
-- **Included Links:**
-  - **Signup:** Direct link to `register.html` for new users.
-  - **Forgot Password:** Direct link to `forgot_password.html` for password recovery.
-
-### `forgot_password.html`
-- **Purpose:** Displays when the user clicks the "Forgot Password?" link from the login page.
-- **Required Fields:** 
-  - **Email:** Password reset link will be sent here.
-- **Recommended Links:**
-  - **Login:** Direct link to `login.html` for users who remember their account.
-  - **Register:** Direct link to `register.html` for users who don’t have an account.
-
-### `password_reset_sent.html`
-- **Purpose:** Appears after the user clicks the "Reset Password" button on `reset_password.html`.
-- **Required Fields:** None.
-- **Required Information that Needs to be Displayed:**
-  - A password reset link has been sent to the user's email.
-  - The link will be valid for 24 hours.
-
-### `reset_password.html`
-- **Purpose:** Appears after the user clicks the password reset link sent to their email.
-- **Required Fields:**
-  - **Password:** New password for the user.
-
-### `index.html`
-- **Purpose:** The main page shown after a successful login.
-
-### `profile.html`
-- **Purpose:** Displays user-specific information, including favorite restaurants and past comments/reviews.
-
-### `detail.html`
-- **Purpose:** Allows the user to view information on a given restaurant and navigate to a Google Reviews page.
-
-## Running Django Locally
-
-Follow these steps to set up and run the Django project locally:
-
-### 1. Clone the Repository
-
-Clone the repository to your local machine:
-
-```bash
-git clone https://github.com/estherpark514/Atlanta-Food-Finder.git
-cd atlanta-food-finder
-```
-
-### 2. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Run the Development Server
-```bash
-python manage.py makemigrations accounts
-python manage.py migrate accounts
-python manage.py migrate
-python manage.py runserver
-```
-
-Start the Django development server:
-
-
-The server will be available at `http://127.0.0.1:8000/`.
-
-### 4. Login
-
-Use the following credentials to log in:
-
-```bash
-Username: CS2340
-Password: Atlanta-Food-Finder
-```
-
-### 5. Access the Admin Interface
-
-To access the Django admin interface, visit `http://127.0.0.1:8000/admin/`
+The following team members contributed to this project:
+- **Esther Park**  
+- **Aakrishtaa Kumar**  
+- **Karolina Dubiel**  
+- **Sabrina Zhu**  
+- **Anderson Chen**
 
 ---
